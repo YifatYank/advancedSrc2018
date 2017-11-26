@@ -10,6 +10,8 @@
  * Version     : 1.0
  * Description : Board class initialization and simple board
  */
+
+// do!!,kjchn cjtdnfg bxjrdxngk,nfv
 using namespace std;
 
 #include <iostream>
