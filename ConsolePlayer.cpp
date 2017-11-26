@@ -16,7 +16,6 @@ ConsolePlayer::ConsolePlayer(CellValue cell_value): value_(cell_value) {
 Point ConsolePlayer::move(vector<Point *> * moves){
 	int x_choise, y_choise;
 	bool is_valid = false;
-	char dummy;
 
 	Board &borad_holder = (*this->game_);
 	this->display_->Display(borad_holder);

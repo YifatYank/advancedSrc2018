@@ -1,4 +1,4 @@
-ame /**
+/**
  * Name : Yifat Yankocivh
  * ID	: 204709224
  * User Name : yankovy
