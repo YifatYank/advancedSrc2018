@@ -20,8 +20,6 @@ private:
 	Board * gameBoard_;
 	Player * white_;
 	Player * black_;
-	CellValue winner_;
-	GameDisplay * display;
 
 	bool playDirection(int x,int y,int xMove,int yMove, CellValue value, bool checkMode);
 public:
@@ -30,7 +28,7 @@ public:
 	 *  Return value	: The ClassicLogic created.
 	 *  General flow	: Assignment of members, creation of the board and initialization of the board .
 	 */
-	ClassicLogic(int board_size, Player * first, Player * second);
+	ClassicLogic(Board * board, Player * first, Player * second);
 
 	/** Function name	: getLegalMoves
 	 *  Parameters		: A player's value - a player's color.
@@ -47,19 +45,6 @@ public:
 	 */
 	virtual bool playMove(Point move, CellValue value);
 
-	/** Function name	: getWinner
-	 *  Parameters		: None.
-	 *  Return value	: The game's winner.
-	 *  General flow	: Returns the game's winner - if the game has not over yet, the functions returns EMPTY.
-	 */
-	virtual CellValue getWinner();
-
-	/** Function name	: playLogic
-	 *  Parameters		: None.
-	 *  Return value	: None.
-	 *  General flow	: Plays the game, until it ends.
-	 */
-	virtual void playLogic();
 
 	/** Function name	: ~ClassicLogic
 	 *  Parameters		: None.

@@ -11,13 +11,13 @@
  * Description : Board class initialization and simple board
  */
 
-// do!!,kjchn cjtdnfg bxjrdxngk,nfv
 using namespace std;
 
 #include <iostream>
 #include "ClassicLogic.h"
 #include "GameLogic.h"
 #include "ConsolePlayer.h"
+#include "GameManager.h"
 
 /** Function name	: PrintBoard
  *  Parameters		: The functions gets a game board.
@@ -34,10 +34,13 @@ void printBoard(Board &game);
 int main() {
 	Player * white = new ConsolePlayer(WHITE);
 	Player * black = new ConsolePlayer(BLACK);
-	GameLogic * logic = new ClassicLogic(4,white,black);
-	logic->playLogic();
 
-	delete(logic);
+	GameManager * manage = new GameManager(white, black, 4);
+	manage->play();
+
+	//cout << "GAME OVER";
+
+	delete(manage);
 	delete(white);
 	delete(black);
 	return 0;

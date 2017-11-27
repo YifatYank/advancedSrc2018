@@ -12,7 +12,7 @@ using namespace std;
 #include "Board.h"
 #include "Point.h"
 
-/** The class is an interfase represents the reversy's game logic/ */
+/** The class is an interface represents the reversy's game logic/ */
 class GameLogic{
 public:
 	/** Function name	: getLegalMoves
@@ -30,19 +30,6 @@ public:
 	 */
 	virtual bool playMove(Point move, CellValue value) = 0;
 
-	/** Function name	: getWinner
-	 *  Parameters		: None.
-	 *  Return value	: The game's winner.
-	 *  General flow	: Returns the game's winner - if the game has not over yet, the functions returns EMPTY.
-	 */
-	virtual CellValue getWinner() = 0;
-
-	/** Function name	: playLogic
-	 *  Parameters		: None.
-	 *  Return value	: None.
-	 *  General flow	: Plays the game, until it ends.
-	 */
-	virtual void playLogic() = 0;
 
 	/** Function name	: ~GameLogic
 	 *  Parameters		: None.

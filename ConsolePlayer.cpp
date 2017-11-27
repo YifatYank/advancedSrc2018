@@ -17,6 +17,11 @@ Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move){
 	int x_choise, y_choise;
 	bool is_valid = false;
 
+	if(this->value_ == WHITE) {
+		cout << "X played (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
+	} else {
+		cout << "O played (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
+	}
 	Board &borad_holder = (*this->game_);
 	this->display_->Display(borad_holder);
 

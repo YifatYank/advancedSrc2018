@@ -7,22 +7,18 @@
 #include "ClassicLogic.h"
 using namespace std;
 
-ClassicLogic::ClassicLogic(int board_size, Player * first, Player * second) : white_(first), black_(second) {
-	int half = board_size / 2;
-	this->gameBoard_ = new Board(board_size);
+ClassicLogic::ClassicLogic(Board * board, Player * first, Player * second) : white_(first), black_(second) {
+	int half = board->getGameBoardWidth() / 2;
+	this->gameBoard_ = board;
 	this->gameBoard_->setCellValue(half, half, WHITE);
 	this->gameBoard_->setCellValue(half + 1,half + 1, WHITE);
 	this->gameBoard_->setCellValue(half,half + 1, BLACK);
 	this->gameBoard_->setCellValue(half + 1, half, BLACK);
-	this->winner_ = EMPTY;
 	this->black_->setBoard(this->gameBoard_);
 	this->white_->setBoard(this->gameBoard_);
-	this->display = new ConsuleDisplay();
 }
 
 ClassicLogic::~ClassicLogic() {
-	delete(this->gameBoard_);
-	delete(this->display);
 }
 
 bool ClassicLogic::playDirection(int x,int y,int xMove,int yMove, CellValue value, bool checkMode) {
@@ -128,8 +124,6 @@ bool ClassicLogic::playMove(Point move, CellValue value) {
 	return is_legal;
 }
 
-
-
 vector <Point *> * ClassicLogic::getLegalMoves(CellValue value){
     int height = this->gameBoard_->getGameBoardWidth();
 
@@ -202,77 +196,3 @@ vector <Point *> * ClassicLogic::getLegalMoves(CellValue value){
     return moves_list;
 }
 
-CellValue ClassicLogic::getWinner() {
-	return this->winner_;
-}
-
-void ClassicLogic::playLogic() {
-	bool is_running = true;
-	Point p(-1,-1);
-	while(is_running) {
-		bool is_valid_move = false, has_played;
-
-		// Play white player.
-		// Get all the possible moves for the white player.
-		vector<Point *> * moves = this->getLegalMoves(this->white_->getValue());
-
-		// If the white player does not have legal moves.
-		if(moves->size() == 0) {
-			has_played = false;
-			if(this->gameBoard_->getEmptyCellsNumber() != 0) {
-				this->white_->move(moves,p);
-			}
-		} else {
-			Point p(0,0);
-			has_played = true;
-			is_valid_move = false;
-			while(!is_valid_move) {
-				p = this->white_->move(moves,p);
-				is_valid_move = this->playMove(p, this->white_->getValue());
-
-				// If the user has enter an in valid move.
-				// Get the list of possible moves, again.
-				if(!is_valid_move){
-					moves = this->getLegalMoves(this->white_->getValue());
-				}
-			}
-			cout << "O played (" << p.getX() <<"," << p.getY() <<  ")" << endl << endl;
-		}
-
-		// Play Black player.
-		// Get all the possible moves for the black player.
-		moves = this->getLegalMoves(this->black_->getValue());
-
-		// If the black player does not have legal moves.
-		if(moves->size() == 0) {
-			if(this->gameBoard_->getEmptyCellsNumber() != 0) {
-				this->black_->move(moves,p);
-			}
-			// If the white player does not have legal moves as well.
-			if(!has_played) {
-				is_running = false;
-			}
-		} else {
-			is_valid_move = false;
-			while(!is_valid_move) {
-				p = this->black_->move(moves,p);
-				is_valid_move = this->playMove(p, this->black_->getValue());
-
-				// If the user has enter an in valid move.
-				// Get the list of possible moves, again.
-				if(!is_valid_move) {
-					moves = this->getLegalMoves(this->black_->getValue());
-				}
-			}
-			cout << "X played (" << p.getX() << "," << p.getY() << ")" << endl << endl;
-		}
-	}
-	this->display->Display(*this->gameBoard_);
-	if(this->gameBoard_->getWhiteCellsNumber() > this->gameBoard_->getBlackCellsNumber()) {
-		this->winner_ = this->white_->getValue();
-		cout << "Player O has won!" << endl;
-	} else {
-		this->winner_ = this->black_->getValue();
-		cout << "Player X has won!" << endl;
-	}
-}
