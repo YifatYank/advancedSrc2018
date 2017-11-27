@@ -10,8 +10,9 @@
 using namespace std;
 #include <vector>
 #include "Board.h"
+#include "Point.h"
 
-/** The class is aninterfase represents the reversy's game logic/ */
+/** The class is an interfase represents the reversy's game logic/ */
 class GameLogic{
 public:
 	/** Function name	: getLegalMoves

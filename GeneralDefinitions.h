@@ -7,12 +7,6 @@
 #ifndef GENERALDEFINITIONS_H_
 #define GENERALDEFINITIONS_H_
 
-/**The struct represents a cell in the board.*/
-struct Point{
-	int x_;
-	int y_;
-};
-
 /** The enum represents the possible values that a game cell could have.*/
 enum CellValue{ BOEDER,
 				EMPTY,

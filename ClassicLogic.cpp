@@ -59,72 +59,77 @@ bool ClassicLogic::playDirection(int x,int y,int xMove,int yMove, CellValue valu
 bool ClassicLogic::playMove(Point move, CellValue value) {
 	bool is_legal = false;
 
-	this->gameBoard_->setCellValue(move.x_,move.y_,value);
+	this->gameBoard_->setCellValue(move.getX(),move.getY(),value);
+	return is_legal;
+
 	// Change up
-	if((this->gameBoard_->getCellValue(move.x_- 1, move.y_) != BOEDER) &&
-	   (this->gameBoard_->getCellValue(move.x_ - 1,move.y_) != EMPTY) &&
-	   (this->gameBoard_->getCellValue(move.x_ - 1,move.y_) != value) &&
-	   (this->playDirection(move.x_ - 1, move.y_, -1,0, value,false))) {
+	if((this->gameBoard_->getCellValue(move.getX()- 1, move.getY()) != BOEDER) &&
+	   (this->gameBoard_->getCellValue(move.getX() - 1,move.getY()) != EMPTY) &&
+	   (this->gameBoard_->getCellValue(move.getX() - 1,move.getY()) != value) &&
+	   (this->playDirection(move.getX() - 1, move.getY(), -1,0, value,false))) {
 		is_legal = true;
 	}
 
 	// Change down
-	if((this->gameBoard_->getCellValue(move.x_ + 1,move.y_) != BOEDER) &&
-	   (this->gameBoard_->getCellValue(move.x_ + 1,move.y_) != EMPTY) &&
-	   (this->gameBoard_->getCellValue(move.x_ + 1,move.y_) != value) &&
-	   (this->playDirection(move.x_ + 1, move.y_, 1,0, value,false))) {
+	if((this->gameBoard_->getCellValue(move.getX() + 1,move.getY()) != BOEDER) &&
+	   (this->gameBoard_->getCellValue(move.getX() + 1,move.getY()) != EMPTY) &&
+	   (this->gameBoard_->getCellValue(move.getX() + 1,move.getY()) != value) &&
+	   (this->playDirection(move.getX() + 1, move.getY(), 1,0, value,false))) {
 		is_legal = true;
 	}
 
 	// Check left.
-	if ((this->gameBoard_->getCellValue(move.x_,move.y_ - 1) != BOEDER) &&
-	    (this->gameBoard_->getCellValue(move.x_,move.y_ - 1) != EMPTY) &&
-	    (this->gameBoard_->getCellValue(move.x_,move.y_ - 1) != value) &&
-		(this->playDirection(move.x_, move.y_ - 1, 0, - 1, value,false))) {
-		is_legal = true;
+	if ((this->gameBoard_->getCellValue(move.getX(),move.getY() - 1) != BOEDER) &&
+		(this->gameBoard_->getCellValue(move.getX(),move.getY() - 1) != EMPTY) &&
+		(this->gameBoard_->getCellValue(move.getX(),move.getY() - 1) != value) &&
+			(this->playDirection(move.getX(), move.getY() - 1, 0, - 1, value,false))) {
+			is_legal = true;
 	}
 
 	// Check right.
-	if ((this->gameBoard_->getCellValue(move.x_,move.y_ + 1) != BOEDER) &&
-	    (this->gameBoard_->getCellValue(move.x_,move.y_ + 1) != EMPTY) &&
-	    (this->gameBoard_->getCellValue(move.x_,move.y_ + 1) != value) &&
-	    (this->playDirection(move.x_, move.y_ + 1, 0, 1, value,false))) {
+	if ((this->gameBoard_->getCellValue(move.getX(),move.getY() + 1) != BOEDER) &&
+	    (this->gameBoard_->getCellValue(move.getX(),move.getY() + 1) != EMPTY) &&
+		(this->gameBoard_->getCellValue(move.getX(),move.getY() + 1) != value) &&
+		(this->playDirection(move.getX(), move.getY() + 1, 0, 1, value,false))) {
 		is_legal = true;
 	}
 
 	// Check up right
-	if ((this->gameBoard_->getCellValue(move.x_ + 1,move.y_ + 1) != BOEDER) &&
-	    (this->gameBoard_->getCellValue(move.x_ + 1,move.y_ + 1) != EMPTY) &&
-	    (this->gameBoard_->getCellValue(move.x_ + 1,move.y_+ 1) != value) &&
-	    (this->playDirection(move.x_ + 1, move.y_ + 1, 1, 1, value,false))) {
+	if ((this->gameBoard_->getCellValue(move.getX() + 1,move.getY() + 1) != BOEDER) &&
+		(this->gameBoard_->getCellValue(move.getX() + 1,move.getY() + 1) != EMPTY) &&
+		(this->gameBoard_->getCellValue(move.getX() + 1,move.getY()+ 1) != value) &&
+		(this->playDirection(move.getX() + 1, move.getY() + 1, 1, 1, value,false))) {
 		is_legal = true;
 	}
 
 	// Check up left
-	if ((this->gameBoard_->getCellValue(move.x_ + 1,move.y_ - 1) != BOEDER) &&
-	    (this->gameBoard_->getCellValue(move.x_ + 1,move.y_ - 1) != EMPTY) &&
-	    (this->gameBoard_->getCellValue(move.x_ + 1,move.y_ - 1) != value) &&
-	    (this->playDirection(move.x_ + 1, move.y_ - 1, 1, - 1, value,false))) {
+	if ((this->gameBoard_->getCellValue(move.getX() + 1,move.getY() - 1) != BOEDER) &&
+	    (this->gameBoard_->getCellValue(move.getX() + 1,move.getY() - 1) != EMPTY) &&
+		(this->gameBoard_->getCellValue(move.getX() + 1,move.getY() - 1) != value) &&
+		(this->playDirection(move.getX() + 1, move.getY() - 1, 1, - 1, value,false))) {
 		is_legal = true;
 	}
 
 	// Check down right
-	if ((this->gameBoard_->getCellValue(move.x_ - 1,move.y_ + 1) != BOEDER) &&
-	    (this->gameBoard_->getCellValue(move.x_ - 1,move.y_ + 1) != EMPTY) &&
-	    (this->gameBoard_->getCellValue(move.x_ - 1,move.y_+ 1) != value) &&
-	    (this->playDirection(move.x_ - 1, move.y_ + 1, -1,1, value,false))) {
+	if ((this->gameBoard_->getCellValue(move.getX() - 1,move.getY() + 1) != BOEDER) &&
+		(this->gameBoard_->getCellValue(move.getX() - 1,move.getY() + 1) != EMPTY) &&
+		(this->gameBoard_->getCellValue(move.getX() - 1,move.getY()+ 1) != value) &&
+		(this->playDirection(move.getX() - 1, move.getY() + 1, -1,1, value,false))) {
 		is_legal = true;
 	}
 
 	// Check down left
-	if ((this->gameBoard_->getCellValue(move.x_ - 1,move.y_ - 1) != BOEDER) &&
-	    (this->gameBoard_->getCellValue(move.x_ - 1,move.y_ - 1) != EMPTY) &&
-	    (this->gameBoard_->getCellValue(move.x_ - 1,move.y_ - 1) != value) &&
-	    (this->playDirection(move.x_ - 1, move.y_ - 1, -1, -1, value,false))) {
+	if ((this->gameBoard_->getCellValue(move.getX() - 1,move.getY() - 1) != BOEDER) &&
+		(this->gameBoard_->getCellValue(move.getX() - 1,move.getY() - 1) != EMPTY) &&
+		(this->gameBoard_->getCellValue(move.getX() - 1,move.getY() - 1) != value) &&
+		(this->playDirection(move.getX() - 1, move.getY() - 1, -1, -1, value,false))) {
 		is_legal = true;
 	}
+
 	return is_legal;
 }
+
+
 
 vector <Point *> * ClassicLogic::getLegalMoves(CellValue value){
     int height = this->gameBoard_->getGameBoardWidth();
@@ -140,73 +145,57 @@ vector <Point *> * ClassicLogic::getLegalMoves(CellValue value){
     			   (this->gameBoard_->getCellValue(index - 1,jndex) != EMPTY) &&
 				   (this->gameBoard_->getCellValue(index - 1,jndex) != value) &&
 				   (this->playDirection(index - 1, jndex, -1,0, value,true))) {
-    				Point * p = new Point();
-    				p->x_ = index;
-    				p->y_ = jndex;
+    				Point * p = new Point(index, jndex);
     				moves_list->push_back(p);
 				// Check down
     			} else if((this->gameBoard_->getCellValue(index + 1,jndex) != BOEDER) &&
     					  (this->gameBoard_->getCellValue(index + 1,jndex) != EMPTY) &&
 						  (this->gameBoard_->getCellValue(index + 1,jndex) != value) &&
 						  (this->playDirection(index + 1, jndex, 1,0, value,true))) {
-    				Point * p = new Point();
-    				p->x_ = index;
-    				p->y_ = jndex;
+    				Point * p = new Point(index, jndex);
     				moves_list->push_back(p);
     			// Check left.
     			} else if ((this->gameBoard_->getCellValue(index,jndex - 1) != BOEDER) &&
     					   (this->gameBoard_->getCellValue(index,jndex - 1) != EMPTY) &&
 					       (this->gameBoard_->getCellValue(index,jndex - 1) != value) &&
 					       (this->playDirection(index, jndex - 1, 0, - 1, value,true))) {
-    				Point * p = new Point();
-    				p->x_ = index;
-    				p->y_ = jndex;
+    				Point * p = new Point(index, jndex);
     				moves_list->push_back(p);
     			// Check right.
     			} else if ((this->gameBoard_->getCellValue(index,jndex + 1) != BOEDER) &&
     					   (this->gameBoard_->getCellValue(index,jndex + 1) != EMPTY) &&
 						   (this->gameBoard_->getCellValue(index,jndex + 1) != value) &&
 						   (this->playDirection(index, jndex + 1, 0, 1, value,true))) {
-    				Point * p = new Point();
-    				p->x_ = index;
-    				p->y_ = jndex;
+    				Point * p = new Point(index, jndex);
     				moves_list->push_back(p);
     				// Check up right
     			} else if ((this->gameBoard_->getCellValue(index + 1,jndex + 1) != BOEDER) &&
     					   (this->gameBoard_->getCellValue(index + 1,jndex + 1) != EMPTY) &&
 						   (this->gameBoard_->getCellValue(index + 1,jndex + 1) != value) &&
 						   (this->playDirection(index + 1, jndex + 1, 1, 1, value,true))) {
-    				Point * p = new Point();
-    				p->x_ = index;
-    				p->y_ = jndex;
+    				Point * p = new Point(index, jndex);
     				moves_list->push_back(p);
 				// 	Check up left
     			} else if ((this->gameBoard_->getCellValue(index + 1,jndex - 1) != BOEDER) &&
     					   (this->gameBoard_->getCellValue(index + 1,jndex - 1) != EMPTY) &&
 						   (this->gameBoard_->getCellValue(index + 1,jndex - 1) != value) &&
 						   (this->playDirection(index + 1, jndex - 1, 1, - 1, value,true))) {
-    				Point * p = new Point();
-    				p->x_ = index;
-    				p->y_ = jndex;
+    				Point * p = new Point(index, jndex);
     				moves_list->push_back(p);
 				// 	Check down right
     			} else if ((this->gameBoard_->getCellValue(index - 1,jndex + 1) != BOEDER) &&
     					   (this->gameBoard_->getCellValue(index - 1,jndex + 1) != EMPTY) &&
 						   (this->gameBoard_->getCellValue(index - 1,jndex + 1) != value) &&
 						   (this->playDirection(index - 1, jndex + 1, -1,1, value,true))) {
-    				Point * p = new Point();
-    				p->x_ = index;
-    				p->y_ = jndex;
+    				Point * p = new Point(index, jndex);
     				moves_list->push_back(p);
 				// 	Check down left
     			} else if ((this->gameBoard_->getCellValue(index - 1,jndex - 1) != BOEDER) &&
     					   (this->gameBoard_->getCellValue(index - 1,jndex - 1) != EMPTY) &&
 						   (this->gameBoard_->getCellValue(index - 1,jndex - 1) != value) &&
 						   (this->playDirection(index - 1, jndex - 1, -1, -1, value,true))) {
-						Point * p = new Point();
-						p->x_ = index;
-						p->y_ = jndex;
-						moves_list->push_back(p);
+    				Point * p = new Point(index, jndex);
+					moves_list->push_back(p);
     			}
     		}
     	}
@@ -220,7 +209,7 @@ CellValue ClassicLogic::getWinner() {
 
 void ClassicLogic::playLogic() {
 	bool is_running = true;
-
+	Point p(0,0);
 	while(is_running) {
 		bool is_valid_move = false, has_played;
 
@@ -235,8 +224,8 @@ void ClassicLogic::playLogic() {
 				this->white_->move(moves);
 			}
 		} else {
+			Point p(0,0);
 			has_played = true;
-			Point p;
 			is_valid_move = false;
 			while(!is_valid_move) {
 				p = this->white_->move(moves);
@@ -248,7 +237,7 @@ void ClassicLogic::playLogic() {
 					moves = this->getLegalMoves(this->white_->getValue());
 				}
 			}
-			cout << "O played (" << p.x_ <<"," << p.y_ <<  ")" << endl << endl;
+			cout << "O played (" << p.getX() <<"," << p.getY() <<  ")" << endl << endl;
 		}
 
 		// Play Black player.
@@ -266,7 +255,6 @@ void ClassicLogic::playLogic() {
 			}
 		} else {
 			is_valid_move = false;
-			Point p;
 			while(!is_valid_move) {
 				p = this->black_->move(moves);
 				is_valid_move = this->playMove(p, this->black_->getValue());
@@ -277,7 +265,7 @@ void ClassicLogic::playLogic() {
 					moves = this->getLegalMoves(this->black_->getValue());
 				}
 			}
-			cout << "X played (" << p.x_ <<"," << p.y_ << ")" << endl << endl;
+			cout << "X played (" << p.getX() << "," << p.getY() << ")" << endl << endl;
 		}
 	}
 	this->display->Display(*this->gameBoard_);

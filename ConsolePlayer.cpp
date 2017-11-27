@@ -29,9 +29,7 @@ Point ConsolePlayer::move(vector<Point *> * moves){
 	if(moves->size() == 0){
 		delete(moves);
 		cout << "No possible moves, play passes back to the other player." << endl;
-		Point p;
-		p.x_ = 0;
-		p.y_ = 0;
+		Point p(0,0);
 		return p;
 	}
 
@@ -40,10 +38,10 @@ Point ConsolePlayer::move(vector<Point *> * moves){
 
 		vector<Point *>::iterator it = moves->begin();
 
-		cout << "(" << (*it)->x_ << "," << (*it)->y_ << ")";
+		cout << "(" << (*it)->getX() << "," << (*it)->getY() << ")";
 		it++;
 		for(;it!=moves->end(); it++){
-			cout << ",(" << (*it)->x_ << "," << (*it)->y_ << ")";
+			cout << ",(" << (*it)->getX() << "," << (*it)->getY() << ")";
 		}
 		cout << endl;
 
@@ -57,7 +55,7 @@ Point ConsolePlayer::move(vector<Point *> * moves){
 		// Checks if the move the user chose is valid.
 		for(it = moves->begin();
 				it!=moves->end(); it++) {
-			if((*it)->x_ == x_choise && (*it)->y_ == y_choise) {
+			if((*it)->getX() == x_choise && (*it)->getY() == y_choise) {
 				is_valid = true;
 				break;
 			}
@@ -76,9 +74,9 @@ Point ConsolePlayer::move(vector<Point *> * moves){
 
 	delete(moves);
 
-	Point p;
-	p.x_= x_choise;
-	p.y_ =y_choise;
+	Point p(0,0);
+	p.setX(x_choise);
+	p.setY(y_choise);
 	return p;
 }
 

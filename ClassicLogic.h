@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "GameDisplay.h"
 #include "ConsuleDisplay.h"
+#include "Point.h"
 #include <iostream>
 using namespace std;
 

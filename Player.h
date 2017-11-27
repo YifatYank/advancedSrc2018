@@ -8,6 +8,7 @@
 #define PLAYER_H_
 #include "GeneralDefinitions.h"
 #include "Board.h"
+#include "Point.h"
 #include <vector>
 using namespace std;
 
