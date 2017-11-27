@@ -13,7 +13,7 @@ ConsolePlayer::ConsolePlayer(CellValue cell_value): value_(cell_value) {
 	this->game_ = NULL;
 }
 
-Point ConsolePlayer::move(vector<Point *> * moves){
+Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move){
 	int x_choise, y_choise;
 	bool is_valid = false;
 

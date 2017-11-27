@@ -27,12 +27,12 @@ public:
 	ConsolePlayer(CellValue value);
 
 	/** Function name	: move
-	 *  Parameters		: The functions gets a list of possible move.
+	 *  Parameters		: The functions gets a list of possible move, and the last move of  the opponent.
 	 *  Return value	: The point chosen between the points provided.
 	 *  General flow	: The function let the user chose between the optional points,
 	 *  				  checks if the point is from the point provided, and returns the point chosen.
 	 */
-	virtual Point move(vector<Point *> * moves);
+	virtual Point move(vector<Point *> * moves, Point opponent_move);
 
 	/** Function name	: getValue
 	 *  Parameters		: None.

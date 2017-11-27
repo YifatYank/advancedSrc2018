@@ -60,7 +60,6 @@ bool ClassicLogic::playMove(Point move, CellValue value) {
 	bool is_legal = false;
 
 	this->gameBoard_->setCellValue(move.getX(),move.getY(),value);
-	return is_legal;
 
 	// Change up
 	if((this->gameBoard_->getCellValue(move.getX()- 1, move.getY()) != BOEDER) &&
@@ -209,7 +208,7 @@ CellValue ClassicLogic::getWinner() {
 
 void ClassicLogic::playLogic() {
 	bool is_running = true;
-	Point p(0,0);
+	Point p(-1,-1);
 	while(is_running) {
 		bool is_valid_move = false, has_played;
 
@@ -221,14 +220,14 @@ void ClassicLogic::playLogic() {
 		if(moves->size() == 0) {
 			has_played = false;
 			if(this->gameBoard_->getEmptyCellsNumber() != 0) {
-				this->white_->move(moves);
+				this->white_->move(moves,p);
 			}
 		} else {
 			Point p(0,0);
 			has_played = true;
 			is_valid_move = false;
 			while(!is_valid_move) {
-				p = this->white_->move(moves);
+				p = this->white_->move(moves,p);
 				is_valid_move = this->playMove(p, this->white_->getValue());
 
 				// If the user has enter an in valid move.
@@ -247,7 +246,7 @@ void ClassicLogic::playLogic() {
 		// If the black player does not have legal moves.
 		if(moves->size() == 0) {
 			if(this->gameBoard_->getEmptyCellsNumber() != 0) {
-				this->black_->move(moves);
+				this->black_->move(moves,p);
 			}
 			// If the white player does not have legal moves as well.
 			if(!has_played) {
@@ -256,7 +255,7 @@ void ClassicLogic::playLogic() {
 		} else {
 			is_valid_move = false;
 			while(!is_valid_move) {
-				p = this->black_->move(moves);
+				p = this->black_->move(moves,p);
 				is_valid_move = this->playMove(p, this->black_->getValue());
 
 				// If the user has enter an in valid move.
