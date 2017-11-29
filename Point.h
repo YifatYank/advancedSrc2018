@@ -15,6 +15,8 @@ private:
 
 public:
 	Point(int x, int y);
+	Point(const Point &obj);
+	Point * copy() const;
 	int getX()const;
 	void setX(int x);
 	int getY()const;

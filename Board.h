@@ -30,6 +30,8 @@ public:
 	 */
 	Board(int width);
 
+	Board(const Board &obj);
+
 	/** Function name	: getCellValue
 	 *  Parameters		: The functions gets a board cell coordinates
 	 *  Return value	: The value the cell store.
@@ -75,6 +77,11 @@ public:
 	int getWhiteCellsNumber() const;
 
 	void setCellValue(int x, int y, CellValue value);
+
+	Board * copyBoard();
+
+	void swap(Board &x, Board &y);
+	//Board swap(Board &other);
 
 };
 

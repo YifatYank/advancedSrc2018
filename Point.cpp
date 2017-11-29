@@ -10,6 +10,16 @@
 Point::Point(int x, int y) : x_(x), y_(y) {
 }
 
+Point::Point(const Point &obj) {
+   x_ = obj.x_;
+   y_ = obj.y_;
+}
+
+Point * Point::copy() const {
+	Point * point = new Point(this)
+	return point;
+}
+
 int Point::getX()const{
 	return this->x_;
 }

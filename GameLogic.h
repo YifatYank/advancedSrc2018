@@ -30,6 +30,9 @@ public:
 	 */
 	virtual bool playMove(Point move, CellValue value) = 0;
 
+	virtual Board * getBoard() const;
+
+	virtual Board * swapBoard(Board &board);
 
 	/** Function name	: ~GameLogic
 	 *  Parameters		: None.

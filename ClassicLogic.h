@@ -17,7 +17,7 @@ using namespace std;
 /*The class represents the classical logic of reversy game */
 class ClassicLogic : public GameLogic {
 private:
-	Board * gameBoard_;
+	Board * game_board_;
 	Player * white_;
 	Player * black_;
 
@@ -30,6 +30,10 @@ public:
 	 */
 	ClassicLogic(Board * board, Player * first, Player * second);
 
+	virtual Board * ClassicLogic::getBoard() const;
+
+	virtual Board * swapBoard(Board * board);
+
 	/** Function name	: getLegalMoves
 	 *  Parameters		: A player's value - a player's color.
 	 *  Return value	: A vector contains all the legal moves the player can do.
@@ -37,6 +41,7 @@ public:
 	 *  			      If the cell is a legal move - the function adds the cell's location to the vector.
 	 */
 	virtual vector<Point *> * getLegalMoves(CellValue value);
+
 
 	/** Function name	: playMove
 	 *  Parameters		: The player's value - a player's color, and the player's move.
