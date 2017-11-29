@@ -30,7 +30,7 @@ public:
 	 */
 	Board(int width);
 
-	Board(const Board &obj);
+	Board(Board & obj);
 
 	/** Function name	: getCellValue
 	 *  Parameters		: The functions gets a board cell coordinates
@@ -79,9 +79,6 @@ public:
 	void setCellValue(int x, int y, CellValue value);
 
 	Board * copyBoard();
-
-	void swap(Board &x, Board &y);
-	//Board swap(Board &other);
 
 };
 

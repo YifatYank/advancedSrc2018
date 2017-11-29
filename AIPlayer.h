@@ -15,8 +15,9 @@ using namespace std;
 
 class AIPlayer: public Player {
 private:
-	Board * game_;
 	CellValue value_;
+	CellValue opp_value_;
+	Board * game_;
 	ConsuleDisplay * display_;
 	GameLogic * logic_;
 
@@ -26,7 +27,7 @@ public:
 	 *  Return value	: The console player created.
 	 *  General flow	: Assignment of the members.
 	 */
-	AIPlayer(CellValue value, GameLogic * logic);
+	AIPlayer(CellValue value, GameLogic * logic, int width);
 
 	/** Function name	: move
 	 *  Parameters		: The functions gets a list of possible move, and the last move of  the opponent.

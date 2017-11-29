@@ -15,8 +15,8 @@ Point::Point(const Point &obj) {
    y_ = obj.y_;
 }
 
-Point * Point::copy() const {
-	Point * point = new Point(this)
+Point * Point::copy() {
+	Point * point = new Point(*this);
 	return point;
 }
 

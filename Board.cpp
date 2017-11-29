@@ -36,7 +36,7 @@ Board::Board(int width){
 	this->empty_cells_num_ = (this->board_width_ - 2) * (this->board_width_- 2);
 }
 
-Board::Board(const Board &obj) {
+Board::Board(Board & obj) {
 	this->game_board_ = obj.game_board_;
 	this->board_width_ = obj.board_width_;
 	this->empty_cells_num_ = obj.empty_cells_num_;
@@ -93,15 +93,7 @@ void Board::setCellValue(int x, int y, CellValue value) {
 }
 
 Board * Board::copyBoard() {
-	Board * board = new Board(this);
+	Board * board = new Board(*this);
 	return board;
 }
 
-void swap(Board &x, Board &y) {
-	   Board temp = new Board::Board(0);
-	   temp = x;
-	   x = y;
-	   y = temp;
-	   delete(temp);
-	   return;
-	}

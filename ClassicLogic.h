@@ -30,7 +30,7 @@ public:
 	 */
 	ClassicLogic(Board * board, Player * first, Player * second);
 
-	virtual Board * ClassicLogic::getBoard() const;
+	virtual Board * getBoard();
 
 	virtual Board * swapBoard(Board * board);
 

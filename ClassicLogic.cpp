@@ -196,7 +196,7 @@ vector <Point *> * ClassicLogic::getLegalMoves(CellValue value){
     return moves_list;
 }
 
-Board * ClassicLogic::getBoard() const {
+Board * ClassicLogic::getBoard(){
 	return this->game_board_;
 }
 
