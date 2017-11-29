@@ -13,7 +13,7 @@ GameManager::GameManager(Player * white, Player * black, int width){
 	this->white_= white;
 	this->black_= black;
 	this->game_board_ = new Board(width);
-	this->logic_= new ClassicLogic(this->game_board_, this->white_, this->black_);
+	this->logic_= new ClassicLogic(new Board(width));
 	this->display_ = new ConsuleDisplay();
 	this->winner_ = EMPTY;
 }
@@ -36,14 +36,15 @@ void GameManager::play() {
 		if(moves->size() == 0) {
 			has_played = false;
 			if(this->game_board_->getEmptyCellsNumber() != 0) {
-				this->white_->move(moves,p);
+				this->white_->move(moves,p,*this->logic_->getBoard());
 			}
 		} else {
-			Point p(0,0);
+			p.setX(-1);
+			p.setY(-1);
 			has_played = true;
 			is_valid_move = false;
 			while(!is_valid_move) {
-				p = this->white_->move(moves,p);
+				p = this->white_->move(moves,p,*this->logic_->getBoard());
 				is_valid_move = this->logic_->playMove(p, this->white_->getValue());
 
 				// If the user has enter an in valid move.
@@ -52,7 +53,6 @@ void GameManager::play() {
 					moves = this->logic_->getLegalMoves(this->white_->getValue());
 				}
 			}
-	//
 		}
 
 		// Play Black player.
@@ -62,7 +62,7 @@ void GameManager::play() {
 		// If the black player does not have legal moves.
 		if(moves->size() == 0) {
 			if(this->game_board_->getEmptyCellsNumber() != 0) {
-				this->black_->move(moves,p);
+				this->black_->move(moves,p,*this->logic_->getBoard());
 			}
 			// If the white player does not have legal moves as well.
 			if(!has_played) {
@@ -71,7 +71,7 @@ void GameManager::play() {
 		} else {
 			is_valid_move = false;
 			while(!is_valid_move) {
-				p = this->black_->move(moves,p);
+				p = this->black_->move(moves,p,*this->logic_->getBoard());
 				is_valid_move = this->logic_->playMove(p, this->black_->getValue());
 
 				// If the user has enter an in valid move.
@@ -83,14 +83,13 @@ void GameManager::play() {
 		}
 	}
 
-	const Board &holder = (*this->game_board_);
-	this->display_->Display(holder);
-	if(this->game_board_->getWhiteCellsNumber() > this->game_board_->getBlackCellsNumber()) {
+	this->display_->Display(*this->logic_->getBoard());
+	if(this->logic_->getBoard()->getWhiteCellsNumber() > this->logic_->getBoard()->getBlackCellsNumber()) {
 		this->winner_ = this->white_->getValue();
-		//cout << "Player O has won!" << endl;
+		cout << "Player O has won!" << endl;
 	} else {
 		this->winner_ = this->black_->getValue();
-		//cout << "Player X has won!" << endl;
+		cout << "Player X has won!" << endl;
 	}
 }
 

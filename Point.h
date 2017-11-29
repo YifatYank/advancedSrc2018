@@ -21,8 +21,8 @@ public:
 	void setX(int x);
 	int getY()const;
 	void setY(int y);
-	bool operator ==(Point &other) const;
-	bool operator !=(Point &other) const;
+	bool operator ==(const Point &other) const;
+	bool operator !=(const Point &other) const;
 	virtual ~Point();
 };
 

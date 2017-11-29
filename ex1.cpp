@@ -14,10 +14,13 @@
 using namespace std;
 
 #include <iostream>
+#include "GeneralDefinitions.h"
 #include "ClassicLogic.h"
 #include "GameLogic.h"
 #include "ConsolePlayer.h"
 #include "GameManager.h"
+#include "ConsuleDisplay.h"
+#include "AIPlayer.h"
 
 /** Function name	: PrintBoard
  *  Parameters		: The functions gets a game board.
@@ -32,13 +35,28 @@ void printBoard(Board &game);
  *  General flow	: The function creates a new reversy game, and prints the board.
  */
 int main() {
-	Player * white = new ConsolePlayer(WHITE);
-	Player * black = new ConsolePlayer(BLACK);
+	Player * white;
+	Player * black;
+	ConsuleDisplay gui = ConsuleDisplay();
+
+GameType type = gui.DisplayOpenMenu();
+	switch(type){
+		case(TWO_PLAYERS):{
+			white = new ConsolePlayer(WHITE);
+			black = new ConsolePlayer(BLACK);
+			break;
+		} case(AGAINST_COMPUTER):{
+			GameLogic * logic = new ClassicLogic(new Board(4));
+			white = new AIPlayer(WHITE, logic);
+			black = new ConsolePlayer(BLACK);
+		}
+	}
+
 
 	GameManager * manage = new GameManager(white, black, 4);
 	manage->play();
 
-	//cout << "GAME OVER";
+
 
 	delete(manage);
 	delete(white);

@@ -14,7 +14,7 @@ using namespace std;
 /** The class is an interface that represents a reversy player, that uses the console.*/
 class ConsolePlayer: public Player {
 private:
-	Board * game_;
+	//Board * game_;
 	CellValue value_;
 	ConsuleDisplay * display_;
 
@@ -32,7 +32,7 @@ public:
 	 *  General flow	: The function let the user chose between the optional points,
 	 *  				  checks if the point is from the point provided, and returns the point chosen.
 	 */
-	virtual Point move(vector<Point *> * moves, Point opponent_move);
+	virtual Point move(vector<Point *> * moves, Point opponent_move, Board &board);
 
 	/** Function name	: getValue
 	 *  Parameters		: None.
@@ -46,7 +46,7 @@ public:
 	 *  Return value	: None.
 	 *  General flow	: The functions set the board the player uses.
 	 */
-	virtual void setBoard(Board * board);
+//	virtual void setBoard(Board * board);
 
 	/** Function name	: ~ConsolePlayer
 	 *  Parameters		: None.

@@ -37,11 +37,22 @@ Board::Board(int width){
 }
 
 Board::Board(Board & obj) {
-	this->game_board_ = obj.game_board_;
 	this->board_width_ = obj.board_width_;
 	this->empty_cells_num_ = obj.empty_cells_num_;
 	this->white_cells_num_ = obj.white_cells_num_;
 	this->black_cells_num_ = obj.black_cells_num_;
+
+	this->game_board_ = new CellValue * [this->board_width_];
+
+	for(int i = 0; i < this->board_width_; ++i) {
+		this->game_board_[i] = new CellValue[this->board_width_];
+	}
+
+	for(int i = 0; i < this->board_width_; i++) {
+		for (int j = 0; j < this->board_width_; j++) {
+			this->game_board_[i][j] = obj.getCellValue(i,j);
+		}
+	}
 }
 
 CellValue Board::getCellValue(int heigth, int width) const {

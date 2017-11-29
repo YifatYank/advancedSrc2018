@@ -8,6 +8,7 @@
 #define GAMEDISPLAY_H_
 
 #include "Board.h"
+#include "GeneralDefinitions.h"
 
 /** The class is an interface that represents how the game is displayed for the user. */
 class GameDisplay {
@@ -18,6 +19,8 @@ public:
 	 *  General flow	: Displaying the game board.
 	 */
 	virtual void Display(const Board &bord) = 0;
+
+	virtual GameType DisplayOpenMenu() = 0;
 
 	/** Function name	: ~GameDisplay
 	 *  Parameters		: None.

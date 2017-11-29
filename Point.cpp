@@ -11,8 +11,8 @@ Point::Point(int x, int y) : x_(x), y_(y) {
 }
 
 Point::Point(const Point &obj) {
-   x_ = obj.x_;
-   y_ = obj.y_;
+   x_ = obj.getX();
+   y_ = obj.getY();
 }
 
 Point * Point::copy() {
@@ -36,15 +36,15 @@ void Point::setY(int y){
 	this->y_ = y;
 }
 
-bool Point::operator ==(Point &other) const{
-	if((this->x_ == other.getX()) && (this->y_ == other.getY())){
+bool Point::operator ==(const Point &other) const{
+	if((this->x_ == other.x_) && (this->y_ == other.y_)){
 		return true;
 	}
 	return false;
 }
 
-bool Point::operator !=(Point &other) const {
-	return !(this->operator ==(other));
+bool Point::operator !=(const Point &other) const {
+	return !(*this == other);
 }
 
 Point::~Point() {

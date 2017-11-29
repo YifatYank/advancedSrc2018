@@ -10,20 +10,19 @@
 
 ConsolePlayer::ConsolePlayer(CellValue cell_value): value_(cell_value) {
 	this->display_ = new ConsuleDisplay();
-	this->game_ = NULL;
 }
 
-Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move){
+Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move, Board &board){
 	int x_choise, y_choise;
 	bool is_valid = false;
+
+	this->display_->Display(board);
 
 	if(this->value_ == WHITE) {
 		cout << "X played (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
 	} else {
 		cout << "O played (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
 	}
-	Board &borad_holder = (*this->game_);
-	this->display_->Display(borad_holder);
 
 	if (this->value_ == WHITE){
 		cout << "O It's your move." << endl;
@@ -34,7 +33,7 @@ Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move){
 	if(moves->size() == 0){
 		delete(moves);
 		cout << "No possible moves, play passes back to the other player." << endl;
-		Point p(0,0);
+		Point p(-1,-1);
 		return p;
 	}
 
@@ -91,8 +90,4 @@ ConsolePlayer::~ConsolePlayer() {
 
 CellValue ConsolePlayer::getValue () const{
 	return this->value_;
-}
-
-void ConsolePlayer::setBoard(Board * board) {
-	this->game_ = board;
 }

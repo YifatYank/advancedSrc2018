@@ -21,7 +21,7 @@ public:
 	 *  General flow	: The function let the user chose between the optional points,
 	 *  				  checks if the point is from the point provided, and returns the point chosen.
 	 */
-	virtual Point move(vector<Point *> * moves, Point opponent_move) = 0;
+	virtual Point move(vector<Point *> * moves, Point opponent_move, Board &board) = 0;
 
 	/** Function name	: getValue
 	 *  Parameters		: None.
@@ -35,7 +35,7 @@ public:
 	 *  Return value	: None.
 	 *  General flow	: The functions set the board the player uses.
 	 */
-	virtual void setBoard(Board * board) = 0;
+	//virtual void setBoard(Board * board) = 0;
 
 	/** Function name	: ~Player
 	 *  Parameters		: None.

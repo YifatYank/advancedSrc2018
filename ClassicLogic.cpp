@@ -7,18 +7,17 @@
 #include "ClassicLogic.h"
 using namespace std;
 
-ClassicLogic::ClassicLogic(Board * board, Player * first, Player * second) : white_(first), black_(second) {
+ClassicLogic::ClassicLogic(Board * board) {
 	int half = board->getGameBoardWidth() / 2;
 	this->game_board_ = board;
 	this->game_board_->setCellValue(half, half, WHITE);
 	this->game_board_->setCellValue(half + 1,half + 1, WHITE);
 	this->game_board_->setCellValue(half,half + 1, BLACK);
 	this->game_board_->setCellValue(half + 1, half, BLACK);
-	this->black_->setBoard(this->game_board_);
-	this->white_->setBoard(this->game_board_);
 }
 
 ClassicLogic::~ClassicLogic() {
+	delete (this->game_board_);
 }
 
 bool ClassicLogic::playDirection(int x,int y,int xMove,int yMove, CellValue value, bool checkMode) {

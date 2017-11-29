@@ -53,4 +53,20 @@ void ConsuleDisplay::Display(const Board &bord){
 	}
 }
 
+GameType ConsuleDisplay::DisplayOpenMenu() {
+	char c;
+	cout << "Choose the type of game you want to play" << endl;
+	cout << "For game against computer press c" << endl;
+	cout << "For game against computer press t" << endl;
+	cin >> &c;
+
+	if(c == 't'){
+		return TWO_PLAYERS;
+	} else {
+		return AGAINST_COMPUTER;
+	}
+
+	return TWO_PLAYERS;
+}
+
 ConsuleDisplay::~ConsuleDisplay(){}

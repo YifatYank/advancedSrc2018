@@ -13,4 +13,7 @@ enum CellValue{ BOEDER,
 				BLACK,
 				WHITE };
 
+/** The enum represents the tupes of game the user can choose from.*/
+enum GameType{  TWO_PLAYERS,
+				AGAINST_COMPUTER};
 #endif /* GENERALDEFINITIONS_H_ */

@@ -18,8 +18,6 @@ using namespace std;
 class ClassicLogic : public GameLogic {
 private:
 	Board * game_board_;
-	Player * white_;
-	Player * black_;
 
 	bool playDirection(int x,int y,int xMove,int yMove, CellValue value, bool checkMode);
 public:
@@ -28,7 +26,7 @@ public:
 	 *  Return value	: The ClassicLogic created.
 	 *  General flow	: Assignment of members, creation of the board and initialization of the board .
 	 */
-	ClassicLogic(Board * board, Player * first, Player * second);
+	ClassicLogic(Board * board);
 
 	virtual Board * getBoard();
 

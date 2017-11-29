@@ -33,6 +33,7 @@ public:
 	 */
 	virtual ~ConsuleDisplay();
 
+	virtual GameType DisplayOpenMenu();
 };
 
 #endif /* CONSULEDISPLAY_H_ */
