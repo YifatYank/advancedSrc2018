@@ -52,11 +52,8 @@ GameType type = gui.DisplayOpenMenu();
 		}
 	}
 
-
 	GameManager * manage = new GameManager(white, black, 4);
 	manage->play();
-
-
 
 	delete(manage);
 	delete(white);
