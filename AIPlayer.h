@@ -1,8 +1,14 @@
-/*
- * AIPlayer.h
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Nov 27, 2017
- *      Author: shomps
+ * Class Name  : AIPlayer.h
+ * Description : Defines the attributes and methods of an
+ * 				 artificial player in the game. (Interface)
  */
 
 #ifndef SRC_AIPLAYER_H_
@@ -20,35 +26,36 @@ private:
 
 public:
 	/** Function name	: AIPlayer
-	 *  Parameters		: value - The players value - the player 'color'.
-	 *  Return value	: The console player created.
+	 *  Parameters		: Player's value ('color').
+	 *  Return value	: The created console player.
 	 *  General flow	: Assignment of the members.
 	 */
 	AIPlayer(CellValue value, GameLogic * logic);
 
 	/** Function name	: move
-	 *  Parameters		: The functions gets a list of possible move, and the last move of  the opponent.
+	 *  Parameters      : list of possible moves, last move of  the opponent,
+	 *  				  game board.
 	 *  Return value	: The point chosen between the points provided.
-	 *  General flow	: The function let the user chose between the optional points,
-	 *  				  checks if the point is from the point provided, and returns the point chosen.
+	 *  General flow	: The function lets the user choose their next move,
+	 *  				  checks if the point is legal,
+	 *  				  and returns the point finally chosen.
 	 */
 	virtual Point move(vector<Point *> * moves, Point last_move, Board &board);
 
 	/** Function name	: getValue
 	 *  Parameters		: None.
-	 *  Return value	: The returns the player value, "color".
-	 *  General flow	: The function return the player's value, the player's color.
+	 *  Return value	: a player's value, their "color".
+	 *  General flow	: The function returns the player's value,
+	 *  				  the player's color.
 	 */
-	virtual CellValue getValue () const;
+	virtual CellValue getValue() const;
 
 	/** Function name	: ~AIPlayer
 	 *  Parameters		: None.
 	 *  Return value	: None.
-	 *  General flow	: Destructor of AIPlayer.
+	 *  General flow	: AIPlayer destructor.
 	 */
 	virtual ~AIPlayer();
 };
-
-
 
 #endif /* SRC_AIPLAYER_H_ */

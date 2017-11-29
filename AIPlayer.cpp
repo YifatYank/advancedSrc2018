@@ -1,8 +1,14 @@
-/*
- * AIPlayer.cpp
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Nov 27, 2017
- *      Author: shomps
+ * Class Name  : AIPlayer.cpp
+ * Description : Implements the methods of an
+ * 				 artificial player in the game.
  */
 
 #include "AIPlayer.h"

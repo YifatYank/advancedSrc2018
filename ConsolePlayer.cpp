@@ -1,7 +1,14 @@
 /**
- * Name : Yifat Yankocivh
- * ID	: 204709224
- * User Name : yankovy
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : ConsolePlayer.h
+ * Description : Implements the methods of a
+ * 				 human player in the game.
  */
 
 #include "ConsolePlayer.h"
@@ -19,20 +26,20 @@ Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move, Board &b
 	this->display_->Display(board);
 
 	if(this->value_ == WHITE) {
-		cout << "X played (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
+		cout << "X played: (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
 	} else {
-		cout << "O played (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
+		cout << "O played: (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
 	}
 
 	if (this->value_ == WHITE){
-		cout << "O It's your move." << endl;
+		cout << "O: Your turn!" << endl;
 	} else {
-		cout << "X It's your move." << endl;
+		cout << "X: Your turn!" << endl;
 	}
 
 	if(moves->size() == 0){
 		delete(moves);
-		cout << "No possible moves, play passes back to the other player." << endl;
+		cout << "No moves left. Turn passes on!" << endl;
 		Point p(-1,-1);
 		return p;
 	}
@@ -49,7 +56,7 @@ Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move, Board &b
 		}
 		cout << endl;
 
-		cout << endl << "Please enter your move row,col:" << endl;
+		cout << endl << "Please enter your next move (row col):" << endl;
 		cin >> x_choise >> y_choise;
 
 		if(!x_choise || !y_choise) {
@@ -65,7 +72,7 @@ Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move, Board &b
 			}
 		}
 		if(!is_valid){
-			cout << "Your choise is not valid, please enter a valid choise." << endl << endl;
+			cout << "Invalid choice, please try again." << endl << endl;
 		}
 	}
 

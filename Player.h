@@ -1,7 +1,14 @@
 /**
- * Name : Yifat Yankocivh
- * ID	: 204709224
- * User Name : yankovy
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : Player.h
+ * Description : Defines the methods of any player
+ * 				 in the game. (Interface)
  */
 
 #ifndef PLAYER_H_
@@ -12,37 +19,35 @@
 #include <vector>
 using namespace std;
 
-/** This class is an interface that represents a reversy player.*/
-class Player{
+class Player {
 public:
 	/** Function name	: move
-	 *  Parameters      : The functions gets a list of possible move, and the last move of  the opponent.
+	 *  Parameters      : list of possible moves, last move of  the opponent,
+	 *  				  game board.
 	 *  Return value	: The point chosen between the points provided.
-	 *  General flow	: The function let the user chose between the optional points,
-	 *  				  checks if the point is from the point provided, and returns the point chosen.
+	 *  General flow	: The function lets the user choose their next move,
+	 *  				  checks if the point is legal,
+	 *  				  and returns the point finally chosen.
 	 */
-	virtual Point move(vector<Point *> * moves, Point opponent_move, Board &board) = 0;
+	virtual Point move(vector<Point *> * moves, Point opponent_move,
+			Board &board) = 0;
 
 	/** Function name	: getValue
 	 *  Parameters		: None.
-	 *  Return value	: The returns the player value, "color".
-	 *  General flow	: The function return the player's value, the player's color.
+	 *  Return value	: a player's value, their "color".
+	 *  General flow	: The function returns the player's value,
+	 *  				  the player's color.
 	 */
-	virtual CellValue getValue () const = 0;
-
-	/** Function name	: setBoard
-	 *  Parameters		: board - A game board.
-	 *  Return value	: None.
-	 *  General flow	: The functions set the board the player uses.
-	 */
-	//virtual void setBoard(Board * board) = 0;
+	virtual CellValue getValue() const = 0;
 
 	/** Function name	: ~Player
 	 *  Parameters		: None.
 	 *  Return value	: None.
-	 *  General flow	: Distractor of player.
+	 *  General flow	: Player destructor.
 	 */
-	virtual ~Player(){};
+	virtual ~Player() {
+	}
+	;
 };
 
 #endif /* PLAYER_H_ */

@@ -1,7 +1,14 @@
 /**
- * Name : Yifat Yankocivh
- * ID	: 204709224
- * User Name : yankovy
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : ConsuleDisplay.cpp
+ * Description : Implements the methods used to display
+ * 				 the surface of the game on the console.
  */
 
 #include "ConsuleDisplay.h"
@@ -55,9 +62,9 @@ void ConsuleDisplay::Display(const Board &bord){
 
 GameType ConsuleDisplay::DisplayOpenMenu() {
 	char c;
-	cout << "Choose the type of game you want to play" << endl;
-	cout << "For game against computer press c" << endl;
-	cout << "For game against computer press t" << endl;
+	cout << "Which type of game would you like to play?" << endl;
+	cout << "Wanna play against computer? (type c)" << endl;
+	cout << "Wanna play against a friend? (type t)" << endl;
 	cin >> &c;
 
 	if(c == 't'){

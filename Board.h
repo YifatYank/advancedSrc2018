@@ -1,7 +1,14 @@
 /**
- * Name : Yifat Yankocivh
- * ID	: 204709224
- * User Name : yankovy
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : Board.h
+ * Description : Defines the attributes and methods
+ * 				 used to manage a game board.
  */
 
 #ifndef BOARD_H_
@@ -9,10 +16,7 @@
 
 #include "GeneralDefinitions.h"
 
-/**
- * The Board class represents the game board of the game reversy.
- */
-class Board{
+class Board {
 private:
 	CellValue ** game_board_;
 	int board_width_;
@@ -22,21 +26,25 @@ private:
 
 public:
 	/** Function name	: Board
-	 *  Parameters		: The functions gets the board width.
-	 *  Return value	: The board that is created.
-	 *  General flow	: The function is a constractor of the Board class.
-	 *  				  The function creates and initiates the board.
-	 *  				  The board's width is the width it have got as a parameter.
+	 *  Parameters		: board width (integer).
+	 *  Return value	: The created board.
+	 *  General flow	: Board constructor.
+	 *  				  Creates and initializes the board.
 	 */
 	Board(int width);
 
+	/**
+	 * Function name    : Board (copy constructor)
+	 * Parameters       : other Board
+	 * Return value     : a Board copied from existing Board.
+	 */
 	Board(Board & obj);
 
 	/** Function name	: getCellValue
-	 *  Parameters		: The functions gets a board cell coordinates
-	 *  Return value	: The value the cell store.
-	 *  General flow	: The function returns the cell value it's coordinated was
-	 *  				  sent to the function.
+	 *  Parameters		: cell coordinates
+	 *  Return value	: cell's inner value.
+	 *  General flow	: returns the cell's value -
+	 *  				  either a color, 'border' or 'empty'.
 	 */
 	CellValue getCellValue(int heigth, int width) const;
 
@@ -45,13 +53,12 @@ public:
 	 *  Return value	: The game board's width.
 	 *  General flow	: The function returns the game board's width.
 	 */
-	int getGameBoardWidth()const;
+	int getGameBoardWidth() const;
 
 	/** Function name	: ~ Board
 	 *  Parameters		: None.
 	 *  Return value	: None.
-	 *  General flow	: This is the destractor of the class it frees all
-	 *  				  the memory allocated by the class.
+	 *  General flow	: Board destructor. Frees board's allocated memory.
 	 */
 	virtual ~ Board();
 
@@ -60,7 +67,7 @@ public:
 	 *  Return value	: The number of empty cells in the board.
 	 *  General flow	: The function returns the number of empty cells in the board.
 	 */
-	int getEmptyCellsNumber()const;
+	int getEmptyCellsNumber() const;
 
 	/** Function name	: getBlackCellsNumber
 	 *  Parameters		: None.
@@ -76,8 +83,20 @@ public:
 	 */
 	int getWhiteCellsNumber() const;
 
+	/**
+	 * Function name    : setCellValue
+	 * Parameters       : two coordinates and a color value
+	 * Return value     : none
+	 * General flow     : sets given value in cell of given coordinates.
+	 */
 	void setCellValue(int x, int y, CellValue value);
 
+	/**
+	 * Function name    : copyBoard
+	 * Parameters       : none
+	 * Return value     : Board pointer
+	 * General flow     : calls the Board copy constructor.
+	 */
 	Board * copyBoard();
 
 };

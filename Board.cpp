@@ -1,7 +1,14 @@
 /**
- * Name : Yifat Yankocivh
- * ID	: 204709224
- * User Name : yankovy
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : Board.cpp
+ * Description : Implements the methods used to manage a
+ * 				 game board.
  */
 
 #include "Board.h"

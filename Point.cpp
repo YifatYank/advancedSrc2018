@@ -1,8 +1,14 @@
-/*
- * Point.cpp
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Nov 27, 2017
- *      Author: yifat
+ * Class Name  : Point.cpp
+ * Description : Implements the attributes and methods of a point
+ * 				 within the game.
  */
 
 #include "Point.h"

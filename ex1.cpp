@@ -1,14 +1,13 @@
 /**
- * Name : Yifat Yankocivh
- * ID	: 204709224
- * User Name : yankovy
- */
-
-/**
- * Name        : main.cpp
- * Author      : yifat yankovich
- * Version     : 1.0
- * Description : Board class initialization and simple board
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : main.cpp
+ * Description : Calls the methods to run the game.
  */
 
 using namespace std;
@@ -23,7 +22,7 @@ using namespace std;
 #include "AIPlayer.h"
 
 /** Function name	: PrintBoard
- *  Parameters		: The functions gets a game board.
+ *  Parameters		: A game board.
  *  Return value	: None
  *  General flow	: The function prints the game board.
  */
@@ -32,7 +31,8 @@ void printBoard(Board &game);
 /** Function name	: main
  *  Parameters		: None.
  *  Return value	: None
- *  General flow	: The function creates a new reversy game, and prints the board.
+ *  General flow	: The function creates a new "reversi" game,
+ *  				  and prints the board.
  */
 int main() {
 	Player * white;
@@ -61,7 +61,7 @@ GameType type = gui.DisplayOpenMenu();
 	return 0;
 }
 
-
+//implementation of the printBoard function from above.
 void printBoard(Board &game){
 	int index, jndex;
 

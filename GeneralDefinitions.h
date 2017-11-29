@@ -1,7 +1,14 @@
 /**
- * Name : Yifat Yankocivh
- * ID	: 204709224
- * User Name : yankovy
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : GeneralDefinitions.h
+ * Description : Defines general information that is
+ * 				 needed widely across other classes.
  */
 
 #ifndef GENERALDEFINITIONS_H_
@@ -13,7 +20,7 @@ enum CellValue{ BOEDER,
 				BLACK,
 				WHITE };
 
-/** The enum represents the tupes of game the user can choose from.*/
+/** The enum represents the types of game the user can choose from.*/
 enum GameType{  TWO_PLAYERS,
 				AGAINST_COMPUTER};
 #endif /* GENERALDEFINITIONS_H_ */

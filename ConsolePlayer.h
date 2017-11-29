@@ -1,7 +1,14 @@
 /**
- * Name : Yifat Yankocivh
- * ID	: 204709224
- * User Name : yankovy
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : ConsolePlayer.h
+ * Description : Defines the attributes and methods of a
+ * 				 human player in the game. (Interface)
  */
 
 #ifndef CONSOLEPLAYER_H_
@@ -11,7 +18,6 @@
 #include "ConsuleDisplay.h"
 using namespace std;
 
-/** The class is an interface that represents a reversy player, that uses the console.*/
 class ConsolePlayer: public Player {
 private:
 	//Board * game_;
@@ -20,38 +26,35 @@ private:
 
 public:
 	/** Function name	: ConsolePlayer
-	 *  Parameters		: value - The players value - the player 'color'.
-	 *  Return value	: The console player created.
-	 *  General flow	: Assinment of the members.
+	 *  Parameters		: Player's value ('color').
+	 *  Return value	: The created console player.
+	 *  General flow	: Assignment of the members.
 	 */
 	ConsolePlayer(CellValue value);
 
 	/** Function name	: move
-	 *  Parameters		: The functions gets a list of possible move, and the last move of  the opponent.
+	 *  Parameters      : list of possible moves, last move of  the opponent,
+	 *  				  game board.
 	 *  Return value	: The point chosen between the points provided.
-	 *  General flow	: The function let the user chose between the optional points,
-	 *  				  checks if the point is from the point provided, and returns the point chosen.
+	 *  General flow	: The function lets the user choose their next move,
+	 *  				  checks if the point is legal,
+	 *  				  and returns the point finally chosen.
 	 */
-	virtual Point move(vector<Point *> * moves, Point opponent_move, Board &board);
+	virtual Point move(vector<Point *> * moves, Point opponent_move,
+			Board &board);
 
 	/** Function name	: getValue
 	 *  Parameters		: None.
-	 *  Return value	: The returns the player value, "color".
-	 *  General flow	: The function return the player's value, the player's color.
+	 *  Return value	: a player's value, their "color".
+	 *  General flow	: The function returns the player's value,
+	 *  				  the player's color.
 	 */
-	virtual CellValue getValue () const;
-
-	/** Function name	: setBoard
-	 *  Parameters		: board - A game board.
-	 *  Return value	: None.
-	 *  General flow	: The functions set the board the player uses.
-	 */
-//	virtual void setBoard(Board * board);
+	virtual CellValue getValue() const;
 
 	/** Function name	: ~ConsolePlayer
 	 *  Parameters		: None.
 	 *  Return value	: None.
-	 *  General flow	: Distractor of ConsolePlayer.
+	 *  General flow	: ConsolePlayer destructor.
 	 */
 	virtual ~ConsolePlayer();
 };
