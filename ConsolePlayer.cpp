@@ -24,11 +24,12 @@ Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move, Board &b
 	bool is_valid = false;
 
 	this->display_->Display(board);
-
-	if(this->value_ == WHITE) {
-		cout << "X played: (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
-	} else {
-		cout << "O played: (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
+	if(opponent_move != Point(-1,-1)) {
+		if(this->value_ == WHITE) {
+			cout << "X played: (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
+		} else {
+			cout << "O played: (" << opponent_move.getX() <<"," << opponent_move.getY() <<  ")" << endl << endl;
+		}
 	}
 
 	if (this->value_ == WHITE){
