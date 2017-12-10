@@ -46,8 +46,7 @@ public:
 	 *  General flow	: Player destructor.
 	 */
 	virtual ~Player() {
-	}
-	;
+	};
 };
 
 #endif /* PLAYER_H_ */

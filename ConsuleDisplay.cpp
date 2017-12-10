@@ -65,12 +65,15 @@ GameType ConsuleDisplay::DisplayOpenMenu() {
 	cout << "Which type of game would you like to play?" << endl;
 	cout << "Wanna play against computer? (type c)" << endl;
 	cout << "Wanna play against a friend? (type t)" << endl;
+	cout << "Wanna play against a player from the Internet? (type r)" << endl;
 	cin >> &c;
 
 	if(c == 't'){
 		return TWO_PLAYERS;
-	} else {
+	} else if (c == 'c'){
 		return AGAINST_COMPUTER;
+	} else {
+		return REMOTE_PALYER;
 	}
 
 	return TWO_PLAYERS;

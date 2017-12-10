@@ -20,6 +20,7 @@ using namespace std;
 #include "GameManager.h"
 #include "ConsuleDisplay.h"
 #include "AIPlayer.h"
+#include "RemotePlayer.h"
 
 /** Function name	: PrintBoard
  *  Parameters		: A game board.
@@ -49,6 +50,17 @@ GameType type = gui.DisplayOpenMenu();
 			GameLogic * logic = new ClassicLogic(new Board(4));
 			white = new AIPlayer(WHITE, logic);
 			black = new ConsolePlayer(BLACK);
+			break;
+		} case (REMOTE_PALYER):{
+			Player * temp = new RemotePlayer();
+			if(temp->getValue() == WHITE){
+				white = temp;
+				black = new ConsolePlayer(BLACK);
+			} else {
+				black = temp;
+				white = new ConsolePlayer(WHITE);
+			}
+			break;
 		}
 	}
 

@@ -22,5 +22,6 @@ enum CellValue{ BOEDER,
 
 /** The enum represents the types of game the user can choose from.*/
 enum GameType{  TWO_PLAYERS,
-				AGAINST_COMPUTER};
+				AGAINST_COMPUTER,
+				REMOTE_PALYER};
 #endif /* GENERALDEFINITIONS_H_ */
