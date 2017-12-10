@@ -1,0 +1,86 @@
+commit c1adec0d21565a3bd565cc6620fb624ba1234d44
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Thu Nov 30 22:24:01 2017 +0200
+
+    Cosmatic changes
+
+commit 70a81949712d0563177e57db33c36625ce14ff14
+Author: bagnosh <shohambagno@gmail.com>
+Date:   Thu Nov 30 00:17:41 2017 +0200
+
+    completeded comments, fixed coding style, edited some prints
+
+commit a310d1ae62e6498f2ce8b4eb24370c2110e01868
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Wed Nov 29 19:18:20 2017 +0200
+
+    Cosmatic changes
+
+commit 72983d1c0c2b0634b3201715c3a0e3f843bee9ce
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Wed Nov 29 18:19:41 2017 +0200
+
+    HOOOOOOOigit status iTs WorKiNG! AIPlayer, a mOnsTer, we so WISE! yAYAgit status
+
+commit c61244efd36675401f00dccf69ab7241ffc7d24a
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Wed Nov 29 12:37:08 2017 +0200
+
+    No compilation errorsgit statusgit status!==]
+
+commit 7cb6d924a4895e5790e17694068c76ca6302a842
+Author: bagnosh <shohambagno@gmail.com>
+Date:   Wed Nov 29 10:03:58 2017 +0200
+
+    added aiplayer, copy methods in board and point, swap method and get board in logic
+
+commit 2093afab818ade3c03810f3ec9a03926028f2dc0
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Mon Nov 27 15:13:36 2017 +0200
+
+    And than game logic spit in half
+
+commit da9989560306cab5cb8d5adff79ef716ef4e1227
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Mon Nov 27 12:25:01 2017 +0200
+
+    Change the function getPossible moves of player, so it gets also the oppnent's last move
+
+commit f17463c95a6dc078c4ca3d873f027da475b3acd8
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Mon Nov 27 12:03:08 2017 +0200
+
+    Change 'Point' from struct to a class
+
+commit 56477ce1695fc80cda650a68cc3751f656092781
+Merge: 928ea98 a58f52d
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Sun Nov 26 17:43:05 2017 +0200
+
+    Merge branch 'master' of https://github.com/YifatYank/advancedSrc2018
+    
+    shoham has updated board.h
+
+commit 928ea98b86c4f6def1b5ee00ed17d9f0d439076f
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Sun Nov 26 17:42:27 2017 +0200
+
+    ex1 change a comment
+
+commit a58f52d5716b8e77892265711b58ee9b1881fc37
+Author: bagnosh <shohambagno@gmail.com>
+Date:   Sun Nov 26 17:38:54 2017 +0200
+
+    boo
+
+commit aa16e1546bba2233d99fe1e9b9f28973945d887d
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Sun Nov 26 17:34:57 2017 +0200
+
+    Compilation error fixed
+
+commit 1556e86c0824ee2b732b612732007c848dc54b10
+Author: Yifat Yankovich <yifatyank@gmail.com>
+Date:   Sun Nov 26 17:07:49 2017 +0200
+
+    Upload project

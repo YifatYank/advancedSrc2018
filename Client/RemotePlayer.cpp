@@ -12,8 +12,7 @@ using namespace std;
 #define BLACK_PLAYER 1
 #define WHITE_PLAYER 2
 
-RemotePlayer::RemotePlayer() :
-		client_(Client()), value_(WHITE) {
+RemotePlayer::RemotePlayer() : value_(WHITE) , client_(Client()) {
 	// Initiates the connection to the remote player
 	try {
 		this->client_.connectToServer();

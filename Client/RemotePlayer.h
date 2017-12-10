@@ -36,7 +36,7 @@ public:
 	 *  				  and returns the point finally chosen.
 	 */
 	virtual Point move(vector<Point *> * moves, Point opponent_move,
-			Board &board) = 0;
+			Board &board);
 
 	virtual ~RemotePlayer();
 };
