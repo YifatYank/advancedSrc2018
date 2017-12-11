@@ -5,7 +5,7 @@
  *      Author: yifat
  */
 #include "Server.h"
-#define PORT 8000
+#define PORT 8002
 
 int main(){
 	Server server(PORT);

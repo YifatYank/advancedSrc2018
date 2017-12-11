@@ -17,7 +17,7 @@
 using namespace std;
 
 #define SERVER_IP "127.0.0.1"
-#define SERVER_PORT 8000
+#define SERVER_PORT 8002
 
 Client::Client() :server_ip_(SERVER_IP), server_port_(SERVER_PORT), client_socket_(0) {
 	cout << "Client constructed" << endl;

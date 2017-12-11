@@ -6,10 +6,11 @@ class Server {
 	private:
 		int port_;
 		int server_socket_1_;
-		int server_socket_2_;
+		//int server_socket_2_;
 
 		void handleClient(int client_socket1, int client_socket2);
 		int add(int a, int b);
+		void setConfigs();
 	public:
 		Server(int port);
 		void start();

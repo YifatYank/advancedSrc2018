@@ -16,9 +16,9 @@
 
 using namespace std;
 
-#define NUMBER_OF_CLIENTS 2
+#define BACK_LOG 10
 Server::Server(int port) :
-		port_(port), server_socket_1_(0), server_socket_2_(0) {
+		port_(port), server_socket_1_(0) {
 	cout << "SERVER CONSTRUCTED!" << endl;
 }
 /*
@@ -106,20 +106,17 @@ void Server::start() {
 	}
 }
 */
+
 void Server::start() {
+	int client_socket1, client_socket2;
+
 	// Initiating the server socket
 	this->server_socket_1_ = socket(AF_INET, SOCK_STREAM, 0);
 	if (server_socket_1_ == -1) {
 		throw "Error (opening socket)";
 		exit(-1);
 	}
-/*
-	this->server_socket_2_ = socket(AF_INET, SOCK_STREAM, 0);
-	if (server_socket_2_ == -1) {
-		throw "Error (opening socket)";
-		exit(-1);
-	}
-*/
+
 	//assign local address to socket
 	struct sockaddr_in server_address1;
 	bzero((void*) &server_address1, sizeof(server_address1));
@@ -132,30 +129,21 @@ void Server::start() {
 		throw "Error (binding 1)";
 		exit(-1);
 	}
-/*
-	struct sockaddr_in server_address2;
-	bzero((void*) &server_address2, sizeof(server_address2));
-	server_address2.sin_family = AF_INET;
-	server_address2.sin_addr.s_addr = INADDR_ANY;
-	server_address2.sin_port = htons(this->port_);
-	errno = bind(this->server_socket_2_, (struct sockaddr*) &server_address2,
-			sizeof(server_address2));
-	if (errno == -1) {
-		throw "Error (binding 2)";
-		exit(-1);
-	}
-*/
-	while (true) {
-		//start listening to incoming connections
-		listen(this->server_socket_1_, NUMBER_OF_CLIENTS);
 
-		//define the client socket structure
-		struct sockaddr_in client_address1;
-		socklen_t client_address_len1;
+	//start listening to incoming connections
+	listen(this->server_socket_1_, BACK_LOG);
+
+	//define the client socket structures
+	struct sockaddr_in client_address1;
+	socklen_t client_address_len1 = sizeof(client_address1);
+	struct sockaddr_in client_address2;
+	socklen_t client_address_len2 = sizeof(client_address2);
+
+	while (true) {
 		cout << "WAITING FOR CLIENT CONNECTION" << endl;
 
 		//accept new client connection
-		int client_socket1 = accept(this->server_socket_1_,
+		client_socket1 = accept(this->server_socket_1_,
 				(struct sockaddr*) &client_address1, &client_address_len1);
 		cout << "CLIENT 1 CONNECTED. WAITING FOR CLIENT 2" << endl;
 		if (client_socket1 == -1) {
@@ -163,24 +151,17 @@ void Server::start() {
 			exit(-1);
 		}
 
-		//start listening to the second client
-		//listen(this->server_socket_2_, NUMBER_OF_CLIENTS);
-
-		listen(this->server_socket_1_, NUMBER_OF_CLIENTS);
-
-		//define the second client socket structure
-		struct sockaddr_in client_address2;
-		socklen_t client_address_len2;
 		cout << "WAITING FOR CLIENT CONNECTION" << endl;
 		//accept new client connection
-		int client_socket2 = accept(this->server_socket_1_,
+		client_socket2 = accept(this->server_socket_1_,
 				(struct sockaddr*) &client_address2, &client_address_len2);
-		cout << "CLIENT 2 CONNECTED." << endl;
 		if (client_socket2 == -1) {
 			throw "Error (accept 2)";
 			exit(-1);
 		}
+		cout << "CLIENT 2 CONNECTED." << endl;
 
+		cout << "here" << endl;
 		// After both of the clients has connected to the server,
 		// sending to each player his number.
 		int color = 1;
@@ -278,5 +259,8 @@ int Server::add(int a, int b) {
 
 void Server::stop() {
 	close(this->server_socket_1_);
-	close(this->server_socket_2_);
+}
+
+void Server::setConfigs() {
+	//
 }
