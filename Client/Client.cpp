@@ -81,7 +81,7 @@ int Client::reciveInt(){
 	int num, err;
 	err = read(this->client_socket_, &num, sizeof(num));
 	if (err == -1) {
-		throw "Error (reading result from socket";
+		throw "Error (reading result from socket)";
 	}
 	return num;
 }
@@ -94,7 +94,7 @@ void Client::disconnectFromServer(){
 
 void Client::setConfigs() {
 	const char* filename =
-			"/home/shomps/Desktop/advPro2018/Advaned/src/Client/config.txt";
+			"Advaned/src/Client/config.txt";
 	std::ifstream inFile(filename);
 
 	// Make sure the file stream is good

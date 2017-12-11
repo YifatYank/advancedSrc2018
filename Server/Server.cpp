@@ -278,7 +278,7 @@ void Server::stop() {
 
 void Server::setConfigs() {
 	const char* filename =
-			"/home/shomps/Desktop/advPro2018/Advaned/src/Server/config.txt";
+			"Advaned/src/Server/config.txt";
 	std::ifstream inFile(filename);
 
 	// Make sure the file stream is good

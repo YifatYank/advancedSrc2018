@@ -46,8 +46,8 @@ void GameManager::play() {
 				this->white_->move(moves, p, *this->logic_->getBoard());
 			}
 		} else {
-			p.setX(NO_MOVE);
-			p.setY(NO_MOVE);
+			//p.setX(NO_MOVE);
+			//p.setY(NO_MOVE);
 			has_played = true;
 			is_valid_move = false;
 			while (!is_valid_move) {
