@@ -24,4 +24,7 @@ enum CellValue{ BOEDER,
 enum GameType{  TWO_PLAYERS,
 				AGAINST_COMPUTER,
 				REMOTE_PALYER};
+
+#define NO_MOVE -1
+
 #endif /* GENERALDEFINITIONS_H_ */

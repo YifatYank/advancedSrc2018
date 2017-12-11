@@ -30,7 +30,7 @@ GameManager::~GameManager() {
 
 void GameManager::play() {
 	bool is_running = true;
-	Point p(-1, -1);
+	Point p(NO_MOVE, NO_MOVE);
 	while (is_running) {
 		bool is_valid_move = false, has_played;
 
@@ -46,8 +46,8 @@ void GameManager::play() {
 				this->white_->move(moves, p, *this->logic_->getBoard());
 			}
 		} else {
-			p.setX(-1);
-			p.setY(-1);
+			p.setX(NO_MOVE);
+			p.setY(NO_MOVE);
 			has_played = true;
 			is_valid_move = false;
 			while (!is_valid_move) {

@@ -15,6 +15,7 @@ class RemotePlayer: public Player {
 private:
 	CellValue value_;
 	Client client_;
+	bool first_t_;
 
 public:
 	RemotePlayer();

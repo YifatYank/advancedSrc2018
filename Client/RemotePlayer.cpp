@@ -12,7 +12,7 @@ using namespace std;
 #define BLACK_PLAYER 1
 #define WHITE_PLAYER 2
 
-RemotePlayer::RemotePlayer() : value_(WHITE) , client_(Client()) {
+RemotePlayer::RemotePlayer() : value_(WHITE) , client_(Client()), first_t_(true) {
 	// Initiates the connection to the remote player
 	try {
 		this->client_.connectToServer();
@@ -21,7 +21,7 @@ RemotePlayer::RemotePlayer() : value_(WHITE) , client_(Client()) {
 				<< endl;
 	}
 
-	int player;
+	int player = 1;
 	// Get from the server the the local player's type, and set the remote player's
 	// type as the opposite of the local player's type.
 	try {
@@ -43,7 +43,7 @@ CellValue RemotePlayer::getValue() const {
 
 Point RemotePlayer::move(vector<Point *> * moves, Point opponent_move,
 		Board &board) {
-	int x_coord, y_coord;
+	int x_coord = 0, y_coord = 0;
 
 	moves->clear();
 	delete (moves);
@@ -51,14 +51,19 @@ Point RemotePlayer::move(vector<Point *> * moves, Point opponent_move,
 	// Send to the other player, the local player's last move,
 	// and get his move
 	try {
-		this->client_.sendInt(opponent_move.getX());
-		this->client_.sendInt(opponent_move.getY());
+		// If this is not the first turn of the first player.
+		if(!(this->first_t_ && opponent_move == Point(NO_MOVE,NO_MOVE))) {
+			this->client_.sendInt(opponent_move.getX());
+			this->client_.sendInt(opponent_move.getY());
+		}
+
 		x_coord = this->client_.reciveInt();
 		y_coord = this->client_.reciveInt();
 	} catch (const char *msg) {
 		cout << msg << endl;
 	}
 
+	this->first_t_ = false;
 	return Point(x_coord,y_coord);
 }
 
