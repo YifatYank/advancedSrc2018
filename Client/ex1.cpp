@@ -36,40 +36,40 @@ void printBoard(Board &game);
  *  				  and prints the board.
  */
 int main() {
-	Player * white;
-	Player * black;
+	Player * first;
+	Player * second;
 	ConsuleDisplay gui = ConsuleDisplay();
 
 GameType type = gui.DisplayOpenMenu();
 	switch(type){
 		case(TWO_PLAYERS):{
-			white = new ConsolePlayer(WHITE);
-			black = new ConsolePlayer(BLACK);
+			first = new ConsolePlayer(WHITE);
+			second = new ConsolePlayer(BLACK);
 			break;
 		} case(AGAINST_COMPUTER):{
 			GameLogic * logic = new ClassicLogic(new Board(4));
-			white = new AIPlayer(WHITE, logic);
-			black = new ConsolePlayer(BLACK);
+			first = new AIPlayer(WHITE, logic);
+			second = new ConsolePlayer(BLACK);
 			break;
 		} case (REMOTE_PALYER):{
 			Player * temp = new RemotePlayer();
 			if(temp->getValue() == WHITE){
-				white = temp;
-				black = new ConsolePlayer(BLACK);
+				second = temp;
+				first = new ConsolePlayer(BLACK);
 			} else {
-				black = temp;
-				white = new ConsolePlayer(WHITE);
+				first = temp;
+				second = new ConsolePlayer(WHITE);
 			}
 			break;
 		}
 	}
 
-	GameManager * manage = new GameManager(white, black, 4);
+	GameManager * manage = new GameManager(first, second, 4);
 	manage->play();
 
 	delete(manage);
-	delete(white);
-	delete(black);
+	delete(first);
+	delete(second);
 	return 0;
 }
 
