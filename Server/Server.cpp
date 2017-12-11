@@ -13,6 +13,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fstream>
 
 using namespace std;
 
@@ -170,7 +171,7 @@ void Server::start() {
 			throw "Error (writing color 1)";
 			exit(-1);
 		}
-		color = 0;
+		color = 2;
 
 		n = write(client_socket2, &color, sizeof(color));
 		if (n == -1) {
