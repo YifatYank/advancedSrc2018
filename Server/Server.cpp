@@ -20,6 +20,7 @@ using namespace std;
 #define BACK_LOG 10
 Server::Server(int port) :
 		port_(port), server_socket_1_(0) {
+	setConfigs();
 	cout << "SERVER CONSTRUCTED!" << endl;
 }
 /*
@@ -179,7 +180,7 @@ void Server::start() {
 			exit(-1);
 		}
 
-		// Hanle the game between the two clients.
+		// Handle the game between the two clients.
 		this->handleClient(client_socket1, client_socket2);
 		//close communication with client
 		close(client_socket1);
@@ -263,5 +264,9 @@ void Server::stop() {
 }
 
 void Server::setConfigs() {
-	//
+	std::fstream myfile("config.txt", std::ios_base::in);
+	int port;
+	myfile >> port;
+	getchar();
+	this->port_ = port;
 }

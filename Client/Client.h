@@ -13,6 +13,7 @@ private:
 	const char *server_ip_;
 	int server_port_;
 	int client_socket_;
+	void setConfigs();
 public:
 	Client();
 	Client(const char *server_ip, int server_port);

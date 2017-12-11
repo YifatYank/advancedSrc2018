@@ -13,6 +13,7 @@
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <fstream>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ using namespace std;
 #define SERVER_PORT 8002
 
 Client::Client() :server_ip_(SERVER_IP), server_port_(SERVER_PORT), client_socket_(0) {
+	setConfigs();
 	cout << "Client constructed" << endl;
 }
 
@@ -83,5 +85,14 @@ void Client::disconnectFromServer(){
 	if(close(this->client_socket_) == -1){
 		throw "Error (disconnecting from server)";
 	}
+}
 
+void Client::setConfigs() {
+	std::fstream myfile("config.txt", std::ios_base::in);
+	int port;
+	char * ip;
+	myfile >> port;
+	this->server_port_ = port;
+	myfile >> ip;
+	this->server_ip_ = ip;
 }
