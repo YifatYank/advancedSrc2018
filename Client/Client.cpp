@@ -93,11 +93,18 @@ void Client::disconnectFromServer(){
 }
 
 void Client::setConfigs() {
-	std::fstream myfile("config.txt", std::ios_base::in);
+	const char* filename =
+			"/home/shomps/Desktop/advPro2018/Advaned/src/Client/config.txt";
+	std::ifstream inFile(filename);
+
+	// Make sure the file stream is good
+	if (!inFile) {
+		cout << endl << "Failed to open file " << filename;
+		return;
+	}
 	int port;
-	char * ip;
-	myfile >> port;
+	char  ip[20];
+	inFile >> port >> ip;
 	this->server_port_ = port;
-	myfile >> ip;
 	this->server_ip_ = ip;
 }

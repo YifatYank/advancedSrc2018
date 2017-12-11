@@ -33,6 +33,7 @@ Server::Server() :
 
 Server::Server(int port) :
 		port_(port), server_socket_1_(0) {
+	setConfigs();
 	cout << "SERVER CONSTRUCTED!" << endl;
 }
 /*
@@ -276,9 +277,16 @@ void Server::stop() {
 }
 
 void Server::setConfigs() {
-	std::fstream myfile("config.txt", std::ios_base::in);
+	const char* filename =
+			"/home/shomps/Desktop/advPro2018/Advaned/src/Server/config.txt";
+	std::ifstream inFile(filename);
+
+	// Make sure the file stream is good
+	if (!inFile) {
+		cout << endl << "Failed to open file " << filename;
+		return;
+	}
 	int port;
-	myfile >> port;
-	getchar();
+	inFile >> port;
 	this->port_ = port;
 }
