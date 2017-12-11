@@ -1,8 +1,13 @@
-/*
- * Client.cpp
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Dec 5, 2017
- *      Author: shomps
+ * Class Name  : Client.cpp
+ * Description : Implements the methods of the Client class.
  */
 
 #include "Client.h"

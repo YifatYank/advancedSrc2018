@@ -1,8 +1,13 @@
-/*
- * Server.cpp
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Dec 5, 2017
- *      Author: shomps
+ * Class Name  : Server.cpp
+ * Description : Implements the methods of the Server class.
  */
 
 #include "Server.h"
@@ -18,96 +23,103 @@
 using namespace std;
 
 #define BACK_LOG 10
-Server::Server(int port) :
-		port_(port), server_socket_1_(0) {
+#define PORT 8000
+
+Server::Server() :
+		port_(PORT), server_socket_1_(0) {
 	setConfigs();
 	cout << "SERVER CONSTRUCTED!" << endl;
 }
-/*
-void Server::start() {
-	this->server_socket_1_ = socket(AF_INET, SOCK_STREAM, 0);
-	if (server_socket_1_ == -1) {
-		cout << "Error (opening socket)" << endl;
-		return;
-	}
-	this->server_socket_2_ = socket(AF_INET, SOCK_STREAM, 0);
-	if (server_socket_2_ == -1) {
-		cout << "Error (opening socket)" << endl;
-		return;
-	}
 
-	//assign local address to socket
-	struct sockaddr_in server_address1;
-	bzero((void*) &server_address1, sizeof(server_address1));
-	server_address1.sin_family = AF_INET;
-	server_address1.sin_addr.s_addr = INADDR_ANY;
-	server_address1.sin_port = htons(this->port_);
-	int errno = bind(this->server_socket_1_,
-			(struct sockaddr*) &server_address1, sizeof(server_address1));
-	if (errno == -1) {
-		cout << "Error (binding 1)" << endl;
-		return;
-	}
-	struct sockaddr_in server_address2;
-	bzero((void*) &server_address2, sizeof(server_address2));
-	server_address2.sin_family = AF_INET;
-	server_address2.sin_addr.s_addr = INADDR_ANY;
-	server_address2.sin_port = htons(this->port_);
-	errno = bind(this->server_socket_2_, (struct sockaddr*) &server_address2,
-			sizeof(server_address2));
-	if (errno == -1) {
-		cout << "Error (binding 2)" << endl;
-		return;
-	}
-
-	while (true) {
-		int color = 1;
-		//start listening to incoming connections
-		listen(this->server_socket_1_, NUMBER_OF_CLIENTS);
-		//define the client socket structure
-		struct sockaddr_in client_address1;
-		socklen_t client_address_len1;
-		cout << "WAITING FOR CLIENT CONNECTION" << endl;
-		//accept new client connection
-		int client_socket1 = accept(this->server_socket_1_,
-				(struct sockaddr*) &client_address1, &client_address_len1);
-		cout << "CLIENT 1 CONNECTED. WAITING FOR CLIENT 2" << endl;
-		if (client_socket1 == -1) {
-			cout << "Error (accept 1)" << endl;
-			return;
-		}
-		int n = write(client_socket1, &color, sizeof(color));
-		if (n == -1) {
-			cout << "Error (writing color 1)" << endl;
-			return;
-		}
-		color = 0;
-		//start listening to incoming connections
-		listen(this->server_socket_2_, 2);
-		//define the client socket structure
-		struct sockaddr_in client_address2;
-		socklen_t client_address_len2;
-		cout << "WAITING FOR CLIENT CONNECTION" << endl;
-		//accept new client connection
-		int client_socket2 = accept(this->server_socket_2_,
-				(struct sockaddr*) &client_address2, &client_address_len2);
-		cout << "CLIENT 2 CONNECTED." << endl;
-		if (client_socket2 == -1) {
-			cout << "Error (accept 2)" << endl;
-			return;
-		}
-		n = write(client_socket2, &color, sizeof(color));
-		if (n == -1) {
-			cout << "Error (writing color 0)" << endl;
-			return;
-		}
-		this->handleClient(client_socket1, client_socket2);
-		//close communication with client
-		close(client_socket1);
-		close(client_socket2);
-	}
+Server::Server(int port) :
+		port_(port), server_socket_1_(0) {
+	cout << "SERVER CONSTRUCTED!" << endl;
 }
-*/
+/*
+ void Server::start() {
+ this->server_socket_1_ = socket(AF_INET, SOCK_STREAM, 0);
+ if (server_socket_1_ == -1) {
+ cout << "Error (opening socket)" << endl;
+ return;
+ }
+ this->server_socket_2_ = socket(AF_INET, SOCK_STREAM, 0);
+ if (server_socket_2_ == -1) {
+ cout << "Error (opening socket)" << endl;
+ return;
+ }
+
+ //assign local address to socket
+ struct sockaddr_in server_address1;
+ bzero((void*) &server_address1, sizeof(server_address1));
+ server_address1.sin_family = AF_INET;
+ server_address1.sin_addr.s_addr = INADDR_ANY;
+ server_address1.sin_port = htons(this->port_);
+ int errno = bind(this->server_socket_1_,
+ (struct sockaddr*) &server_address1, sizeof(server_address1));
+ if (errno == -1) {
+ cout << "Error (binding 1)" << endl;
+ return;
+ }
+ struct sockaddr_in server_address2;
+ bzero((void*) &server_address2, sizeof(server_address2));
+ server_address2.sin_family = AF_INET;
+ server_address2.sin_addr.s_addr = INADDR_ANY;
+ server_address2.sin_port = htons(this->port_);
+ errno = bind(this->server_socket_2_, (struct sockaddr*) &server_address2,
+ sizeof(server_address2));
+ if (errno == -1) {
+ cout << "Error (binding 2)" << endl;
+ return;
+ }
+
+ while (true) {
+ int color = 1;
+ //start listening to incoming connections
+ listen(this->server_socket_1_, NUMBER_OF_CLIENTS);
+ //define the client socket structure
+ struct sockaddr_in client_address1;
+ socklen_t client_address_len1;
+ cout << "WAITING FOR CLIENT CONNECTION" << endl;
+ //accept new client connection
+ int client_socket1 = accept(this->server_socket_1_,
+ (struct sockaddr*) &client_address1, &client_address_len1);
+ cout << "CLIENT 1 CONNECTED. WAITING FOR CLIENT 2" << endl;
+ if (client_socket1 == -1) {
+ cout << "Error (accept 1)" << endl;
+ return;
+ }
+ int n = write(client_socket1, &color, sizeof(color));
+ if (n == -1) {
+ cout << "Error (writing color 1)" << endl;
+ return;
+ }
+ color = 0;
+ //start listening to incoming connections
+ listen(this->server_socket_2_, 2);
+ //define the client socket structure
+ struct sockaddr_in client_address2;
+ socklen_t client_address_len2;
+ cout << "WAITING FOR CLIENT CONNECTION" << endl;
+ //accept new client connection
+ int client_socket2 = accept(this->server_socket_2_,
+ (struct sockaddr*) &client_address2, &client_address_len2);
+ cout << "CLIENT 2 CONNECTED." << endl;
+ if (client_socket2 == -1) {
+ cout << "Error (accept 2)" << endl;
+ return;
+ }
+ n = write(client_socket2, &color, sizeof(color));
+ if (n == -1) {
+ cout << "Error (writing color 0)" << endl;
+ return;
+ }
+ this->handleClient(client_socket1, client_socket2);
+ //close communication with client
+ close(client_socket1);
+ close(client_socket2);
+ }
+ }
+ */
 
 void Server::start() {
 	int client_socket1, client_socket2;
