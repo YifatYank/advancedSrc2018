@@ -23,15 +23,15 @@
 using namespace std;
 
 #define SERVER_IP "127.0.0.1"
-#define SERVER_PORT 8002
+#define SERVER_PORT 8000
 
 Client::Client() :server_ip_(SERVER_IP), server_port_(SERVER_PORT), client_socket_(0) {
 	setConfigs();
 	cout << "Client constructed" << endl;
 }
 
-Client::Client(const char *server_ip, int server_port) :
-		server_ip_(server_ip), server_port_(server_port), client_socket_(0) {
+Client::Client(const char *server_ip, int server_port) : server_port_(server_port), client_socket_(0) {
+	strcpy(this->server_ip_,server_ip);
 	cout << "Client constructed" << endl;
 }
 
@@ -102,10 +102,10 @@ void Client::setConfigs() {
 		cout << endl << "Failed to open file " << filename;
 		return;
 	}
+
 	int port;
-	//char  ip[20];
-    string ip;
+	char  ip[20];
 	inFile >> port >> ip;
 	this->server_port_ = port;
-	this->server_ip_ = ip;
+	strcpy(this->server_ip_,ip);
 }

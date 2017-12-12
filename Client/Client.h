@@ -15,7 +15,7 @@
 
 class Client {
 private:
-	const char *server_ip_;
+	char server_ip_[20];
 	int server_port_;
 	int client_socket_;
 	/** Function name	    : setConfigs
