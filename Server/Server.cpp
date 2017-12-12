@@ -241,8 +241,7 @@ void Server::handleClient(int client_socket1, int client_socket2) {
 		n = read(client_socket2, &num1, sizeof(num1));
 		if (n == -1) {
 			throw "Error (reading num1)";
-			exit(-1);
-		}
+			exit(-1);		}
 		if (n == 0) {
 			cout << "Client 2 disconnected" << endl;
 			return;
