@@ -78,12 +78,7 @@ Point ConsolePlayer::move(vector<Point *> * moves, Point opponent_move, Board &b
 	}
 
 	// free the points vector
-	while(moves->size() != 0){
-		Point * p = moves->back();
-		moves->pop_back();
-		delete(p);
-	}
-
+	moves->clear();
 	delete(moves);
 
 	Point p(0,0);

@@ -42,8 +42,9 @@ void GameManager::play() {
 		// If the white player does not have legal moves.
 		if (moves->size() == 0) {
 			has_played = false;
-			// If the player has no move but the game is not over yet.
-			if (this->game_board_->getEmptyCellsNumber() != 0) {
+
+			// If the game has not over yet
+			if(this->logic_->getBoard()->getEmptyCellsNumber() != 0) {
 				this->white_->move(moves, p, *this->logic_->getBoard());
 			}
 		} else {
@@ -69,11 +70,11 @@ void GameManager::play() {
 
 		// If the black player does not have legal moves.
 		if (moves->size() == 0) {
-			//this->game_board_->getEmptyCellsNumber() != 0
-			// If the player has no move but the game is not over yet.
-			if (this->logic_->getBoard()->getEmptyCellsNumber() != 0) {
+			// If the game has not over yet
+			if(this->logic_->getBoard()->getEmptyCellsNumber() != 0) {
 				this->black_->move(moves, p, *this->logic_->getBoard());
 			}
+
 			// If the white player does not have legal moves as well.
 			if (!has_played) {
 				is_running = false;
@@ -81,6 +82,7 @@ void GameManager::play() {
 		} else {
 			is_valid_move = false;
 			while (!is_valid_move) {
+
 				p = this->black_->move(moves, p, *this->logic_->getBoard());
 				is_valid_move = this->logic_->playMove(p,
 						this->black_->getValue());
