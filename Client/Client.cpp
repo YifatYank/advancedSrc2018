@@ -94,7 +94,7 @@ void Client::disconnectFromServer(){
 
 void Client::setConfigs() {
 	const char* filename =
-			"Advaned/src/Client/config.txt";
+			"./config.txt";
 	std::ifstream inFile(filename);
 
 	// Make sure the file stream is good
@@ -103,7 +103,8 @@ void Client::setConfigs() {
 		return;
 	}
 	int port;
-	char  ip[20];
+	//char  ip[20];
+    string ip;
 	inFile >> port >> ip;
 	this->server_port_ = port;
 	this->server_ip_ = ip;
