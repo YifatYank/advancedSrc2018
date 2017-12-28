@@ -6,6 +6,7 @@
  */
 
 #include "RemotePlayer.h"
+#include "ConsuleDisplay.h"
 #include <iostream>
 using namespace std;
 
@@ -54,6 +55,10 @@ Point RemotePlayer::move(vector<Point *> * moves, Point opponent_move,
 			this->client_.sendInt(opponent_move.getX());
 			this->client_.sendInt(opponent_move.getY());
 		}
+
+        ConsuleDisplay console = ConsuleDisplay();
+        console.Display(board);
+        cout << "Waiting for other player's move..." << endl;
 
 		// If the opponent next move i the game next move
 		// the remote opponent wont return an answer so we deals with these case localy.

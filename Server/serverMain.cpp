@@ -9,7 +9,6 @@
 
 int main(){
 	Server server(PORT);
-	//Server server();
 	server.start();
 	server.stop();
 	return 0;

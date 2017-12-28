@@ -20,37 +20,37 @@ private:
 	//int server_socket_2_;
 
 	void handleClient(int client_socket1, int client_socket2);
-	int add(int a, int b);
+
 	/** Function name	    : setConfigs
-		 * Parameters		: none
-		 * Return value	    : none
-		 * General flow	    : sets configurations from file.
-		 */
+	 * Parameters		: none
+	 * Return value	    : none
+	 * General flow	    : sets configurations from file.
+	 */
 	void setConfigs();
 public:
 	/** Function name	    : constructor
-		 * Parameters		: port number
-		 * Return value	    : new Server
-		 * General flow	    : creates a server.
-		 */
+	 * Parameters		: port number
+	 * Return value	    : new Server
+	 * General flow	    : creates a server.
+	 */
 	Server(int port);
 	/** Function name	    : constructor (alternative)
-		 * Parameters		: none
-		 * Return value	    : new Server
-		 * General flow	    : creates a server.
-		 */
+	 * Parameters		: none
+	 * Return value	    : new Server
+	 * General flow	    : creates a server.
+	 */
 	Server();
 	/** Function name	    : start
-		 * Parameters		: none
-		 * Return value	    : none
-		 * General flow	    : activates server.
-		 */
+	 * Parameters		: none
+	 * Return value	    : none
+	 * General flow	    : activates server.
+	 */
 	void start();
 	/** Function name	    : stop
-		 * Parameters		: none
-		 * Return value	    : none
-		 * General flow	    : deactivates server.
-		 */
+	 * Parameters		: none
+	 * Return value	    : none
+	 * General flow	    : deactivates server.
+	 */
 	void stop();
 };
 

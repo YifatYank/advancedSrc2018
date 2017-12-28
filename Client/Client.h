@@ -13,6 +13,11 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
+#include <string>
+using namespace std;
+
+#define BUFFER_SIZE 64
+
 class Client {
 private:
 	char server_ip_[20];
@@ -61,7 +66,20 @@ public:
 		 * General flow	    : recieves int from server.
 		 */
 	int reciveInt();
-};
 
+	/** Function name	    : sendString
+	 * Parameters		: a string
+	 * Return value	    : none
+	 * General flow	    : sends a string to server.
+	 */
+	void sendString(string str);
+
+	/** Function name	: reciveString
+	 * Parameters		: none
+	 * Return value	    : string
+	 * General flow	    : recieves a string from server.
+	 */
+	string reciveString();
+};
 
 #endif /* CLIENT_H_ */

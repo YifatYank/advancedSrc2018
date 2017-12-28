@@ -11,13 +11,13 @@
  */
 
 #include "Client.h"
-#include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <iostream>
 #include <fstream>
 
 using namespace std;
@@ -66,7 +66,8 @@ void Client::connectToServer() {
 	if (connect(this->client_socket_, (struct sockaddr*)&server_address, sizeof(server_address)) == -1) {
 		throw "Error (connecting to server)";
 	}
-	cout << "CONNECTED TO SERVER" << endl;
+//	cout << "Connected to server" << endl;
+//    cout << "Waiting for other player to join..." << endl;
 }
 
 void Client::sendInt(int num) {
@@ -93,9 +94,8 @@ void Client::disconnectFromServer(){
 }
 
 void Client::setConfigs() {
-	const char* filename =
-			"./config.txt";
-	std::ifstream inFile(filename);
+	const char filename[20] =	"./config.txt";
+	ifstream inFile(filename);
 
 	// Make sure the file stream is good
 	if (!inFile) {
@@ -108,4 +108,24 @@ void Client::setConfigs() {
 	inFile >> port >> ip;
 	this->server_port_ = port;
 	strcpy(this->server_ip_,ip);
+}
+
+void Client::sendString(string str){
+	const char * str_to_send = str.c_str();
+	//write argument to socket
+	int err = write(this->client_socket_, &str_to_send, sizeof(str_to_send));
+	if (err == -1) {
+		throw "Error (writing a to socket)";
+	}
+}
+
+string Client::reciveString(){
+	int err;
+	char buffer[BUFFER_SIZE];
+	err = read(this->client_socket_, buffer, BUFFER_SIZE);
+	if (err == -1) {
+		throw "Error (reading result from socket)";
+	}
+	string str = string(buffer);
+	return buffer;
 }

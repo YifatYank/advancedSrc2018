@@ -10,8 +10,6 @@
  * Description : Calls the methods to run the game.
  */
 
-using namespace std;
-
 #include <iostream>
 #include "GeneralDefinitions.h"
 #include "ClassicLogic.h"
@@ -22,6 +20,7 @@ using namespace std;
 #include "AIPlayer.h"
 #include "RemotePlayer.h"
 
+using namespace std;
 /** Function name	: PrintBoard
  *  Parameters		: A game board.
  *  Return value	: None
