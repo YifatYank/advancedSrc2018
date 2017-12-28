@@ -16,8 +16,9 @@ private:
 	string name;
 
 public:
-	string getName() = 0;
-	void * doCommand(void * params) = 0;
+	virtual string getName() = 0;
+	virtual void * doCommand(void * params) = 0;
+	virtual ~Command();
 };
 
 #endif /* SERVER_COMMAND_H_ */
