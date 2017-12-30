@@ -13,11 +13,12 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
+#include "ClientHandler.h"
 class Server {
 private:
 	int port_;
 	int server_socket_1_;
-	//int server_socket_2_;
+	ClientHandler & handler_;
 
 	void handleClient(int client_socket1, int client_socket2);
 
@@ -33,15 +34,16 @@ public:
 	 * Return value	    : new Server
 	 * General flow	    : creates a server.
 	 */
-	Server(int port);
+	Server(int port, ClientHandler & client_handler);
 	/** Function name	    : constructor (alternative)
-	 * Parameters		: none
+	 * Parameters		: port 		- The port number the server will listen to.
+	 * 					  handler 	- The handler will handle the clients once they are connected.
 	 * Return value	    : new Server
 	 * General flow	    : creates a server.
 	 */
-	Server();
+	Server(ClientHandler & client_handler);
 	/** Function name	    : start
-	 * Parameters		: none
+	 * Parameters		: handler 	- The handler will handle the clients once they are connected.
 	 * Return value	    : none
 	 * General flow	    : activates server.
 	 */

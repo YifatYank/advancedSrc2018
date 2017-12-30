@@ -25,20 +25,19 @@ using namespace std;
 #define BACK_LOG 10
 #define PORT 8000
 
-Server::Server() :
-		port_(PORT), server_socket_1_(0) {
+Server::Server(ClientHandler & client_handler): port_(PORT) , server_socket_1_(0) , handler_(client_handler){
 	setConfigs();
 	//cout << "SERVER CONSTRUCTED!" << endl;
 }
 
-Server::Server(int port) :
-		port_(port), server_socket_1_(0) {
+Server::Server(int port, ClientHandler & client_handler)
+		: port_(port), server_socket_1_(0) ,  handler_(client_handler) {
 	setConfigs();
 	//cout << "SERVER CONSTRUCTED!" << endl;
 }
 
 void Server::start() {
-	int client_socket1, client_socket2;
+	int client_socket;
 
 	// Initiating the server socket
 	this->server_socket_1_ = socket(AF_INET, SOCK_STREAM, 0);
@@ -63,58 +62,24 @@ void Server::start() {
 	//start listening to incoming connections
 	listen(this->server_socket_1_, BACK_LOG);
 
-	//define the client socket structures
-	struct sockaddr_in client_address1;
-	socklen_t client_address_len1 = sizeof(client_address1);
-	struct sockaddr_in client_address2;
-	socklen_t client_address_len2 = sizeof(client_address2);
+	while(true){
+		//define the client socket structures
+		struct sockaddr_in client_address;
+		socklen_t client_address_len = sizeof(client_address);
 
-	while (true) {
-		//cout << "WAITING FOR CLIENT CONNECTION" << endl;
-
-		//accept new client connection
-		client_socket1 = accept(this->server_socket_1_,
-				(struct sockaddr*) &client_address1, &client_address_len1);
+		// Connect to a client tries to communicate with the server
+		client_socket = accept(this->server_socket_1_,
+				(struct sockaddr*) &client_address, &client_address_len);
 		//cout << "CLIENT 1 CONNECTED. WAITING FOR CLIENT 2" << endl;
-		if (client_socket1 == -1) {
+		if (client_socket == -1) {
 			throw "Error (accept 1)";
-			exit(-1);
+			continue;
 		}
 
-		//cout << "WAITING FOR CLIENT CONNECTION" << endl;
-		//accept new client connection
-		client_socket2 = accept(this->server_socket_1_,
-				(struct sockaddr*) &client_address2, &client_address_len2);
-		if (client_socket2 == -1) {
-			throw "Error (accept 2)";
-			exit(-1);
-		}
-		//cout << "CLIENT 2 CONNECTED." << endl;
-
-		cout << "here" << endl;
-		// After both of the clients has connected to the server,
-		// sending to each player his number.
-		int color = 1;
-		int n = write(client_socket1, &color, sizeof(color));
-		if (n == -1) {
-			throw "Error (writing color 1)";
-			exit(-1);
-		}
-		color = 2;
-
-		n = write(client_socket2, &color, sizeof(color));
-		if (n == -1) {
-			throw "Error (writing color 0)";
-			exit(-1);
-		}
-
-		// Handle the game between the two clients.
-		this->handleClient(client_socket1, client_socket2);
-		//close communication with client
-		close(client_socket1);
-		close(client_socket2);
+		this->handler_.handleClient(client_socket);
+		// Todo - something with lst of all the open sokets.
+		close(client_socket);
 	}
-
 }
 
 void Server::handleClient(int client_socket1, int client_socket2) {

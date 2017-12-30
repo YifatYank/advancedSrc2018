@@ -16,7 +16,7 @@ using namespace std;
 
 class GameMaster {
 private:
-	vector<Game> games;
+	vector<Game> games_;
 	Game findGame(string);
 public:
 	GameMaster();

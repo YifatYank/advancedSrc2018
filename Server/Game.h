@@ -12,8 +12,8 @@
 using namespace std;
 
 typedef struct {
-	string name;
-	int socket;
+	string name_;
+	int socket_;
 } Game;
 
 

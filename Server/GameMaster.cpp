@@ -10,17 +10,17 @@
 using namespace std;
 
 GameMaster::GameMaster() {
-	this->games = vector<Game>();
+	this->games_ = vector<Game>();
 }
 
 Game GameMaster::startGame(string name, int socket_number) {
 	Game find = findGame(name);
-	if (find.name != "") {
+	if (find.name_ != "") {
 		Game ret = { "", -1, };
 		return ret;
 	}
 	Game game = { name, socket_number, };
-	this->games.push_back(game);
+	this->games_.push_back(game);
 	return game;
 }
 
@@ -32,9 +32,9 @@ Game GameMaster::joinGame(string name) {
 
 void GameMaster::removeGame(string name) {
 	vector<Game>::iterator it;
-	for (it = this->games.begin(); it != this->games.end(); it++) {
-		if (it->name == name) {
-			this->games.erase(it);
+	for (it = this->games_.begin(); it != this->games_.end(); it++) {
+		if (it->name_ == name) {
+			this->games_.erase(it);
 		}
 	}
 }
@@ -46,14 +46,14 @@ GameMaster::~GameMaster() {
 	 this->games.erase(it);
 	 }
 	 */
-	this->games.clear();
+	this->games_.clear();
 }
 
 Game GameMaster::findGame(string game) {
 	vector<Game>::iterator it;
-	for (it = this->games.begin(); it != this->games.end(); it++) {
-		if (it->name == game) {
-			Game ret = { it->name, it->socket, };
+	for (it = this->games_.begin(); it != this->games_.end(); it++) {
+		if (it->name_ == game) {
+			Game ret = { it->name_, it->socket_, };
 			return ret;
 			//return this->games(it - games.begin());
 		}
