@@ -17,9 +17,9 @@
 
 using namespace std;
 
-ListCommand::ListCommand(string command_name, GameMaster & games_master) :
+ListCommand::ListCommand(GameMaster & games_master) :
 		games_(games_master) {
-	this->name_ = command_name;
+	this->name_ = "list_games";
 }
 void ListCommand::execute(vector<string> args) {
 	string client_socket_str = args.back();
