@@ -17,7 +17,7 @@ class ClientCommand {
 public:
 	ClientCommand();
 	virtual string getName() = 0;
-	virtual bool execute(vector <string> args) = 0;
+	virtual bool execute();
 	virtual ~ClientCommand();
 };
 
