@@ -39,6 +39,15 @@ void GameMaster::removeGame(string name) {
 	}
 }
 
+vector<string> GameMaster::getGames() {
+	vector<string> names;
+	vector<Game>::iterator it;
+	for (it = this->games_.begin(); it != this->games_.end(); it++) {
+		names.push_back(it->name_);
+	}
+	return names;
+}
+
 GameMaster::~GameMaster() {
 	/*
 	 vector<Game>::iterator it;

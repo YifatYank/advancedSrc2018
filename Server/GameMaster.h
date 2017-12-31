@@ -23,6 +23,7 @@ public:
 	Game startGame(string name, int socket_number);
 	Game joinGame(string name);
 	void removeGame(string name);
+	vector<string> getGames();
 	virtual ~GameMaster();
 };
 
