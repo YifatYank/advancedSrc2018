@@ -21,7 +21,7 @@ joinCommand::joinCommand(GameMaster & games_master) :
 	this->name_ = "join";
 }
 
-virtual void joinCommand::execute(vector<string> args) {
+void joinCommand::execute(vector<string> args) {
 	string game_name = args.back();
 	args.back();
 	string client_socket_str = args.back();
@@ -31,7 +31,7 @@ virtual void joinCommand::execute(vector<string> args) {
 	Game game = this->games_.joinGame(game_name);
 
 	// If the game is a legal game
-	if (game.name_ != "" & game.socket_ != -1) {
+	if (game.name_ != "" && game.socket_ != -1) {
 		// Todo - return to the client a value that will indicate the game name in not valid.
 	}
 

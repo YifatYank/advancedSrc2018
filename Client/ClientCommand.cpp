@@ -12,6 +12,8 @@ ClientCommand::ClientCommand() {
 
 }
 
+
+
 ClientCommand::~ClientCommand() {
 	// TODO Auto-generated destructor stub
 }

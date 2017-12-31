@@ -8,9 +8,16 @@
 #ifndef CLIENT_CLIENTCOMMAND_H_
 #define CLIENT_CLIENTCOMMAND_H_
 
+#include <vector>
+#include <string>
+using namespace std;
+
+
 class ClientCommand {
 public:
 	ClientCommand();
+	virtual string getName() = 0;
+	virtual void execute(vector <string> args) = 0;
 	virtual ~ClientCommand();
 };
 
