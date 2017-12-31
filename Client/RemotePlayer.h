@@ -15,7 +15,7 @@ class RemotePlayer: public Player {
 private:
 	CellValue value_;
 	Client client_;
-	bool first_t_;
+	bool first_t_; //Indicates weather it is the first step of the user.
 
 public:
 	RemotePlayer();

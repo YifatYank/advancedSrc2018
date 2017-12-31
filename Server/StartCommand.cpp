@@ -15,9 +15,9 @@
 #include <stdlib.h>
 #include <fstream>
 
-StartCommand::StartCommand(string command_name, GameMaster & games_master) :
+StartCommand::StartCommand(GameMaster & games_master) :
 		games_(games_master) {
-	this->name_ = command_name;
+	this->name_ = "start";
 }
 
 void StartCommand::execute(vector<string> args) {
@@ -33,6 +33,7 @@ void StartCommand::execute(vector<string> args) {
 		return_code = -1;
 	}
 
+	//
 	err = write(client_socket, &return_code, sizeof(return_code));
 	if (err == -1) {
 		throw "Error (writing num1)";

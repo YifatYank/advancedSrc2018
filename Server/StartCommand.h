@@ -17,7 +17,7 @@ private:
 	GameMaster & games_;
 
 public:
-	StartCommand(string command_name, GameMaster & games_master);
+	StartCommand(GameMaster & games_master);
 	virtual void execute(vector <string> args);
 	virtual ~StartCommand();
 };
