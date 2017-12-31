@@ -26,13 +26,12 @@ void ListCommand::execute(vector<string> args) {
 	int client_socket = this->string_to_int(client_socket_str);
 	vector<string> names = this->games_.getGames();
 	vector<string>::iterator it;
-	const char * str_to_send = "Current Games: \n\n";
+	const char * str_to_send = "Current Games: \n";
 	int err = write(client_socket, &str_to_send, sizeof(str_to_send));
 	if (err == -1) {
 		throw "Error (writing message to socket)";
 	}
 	for (it = names.begin(); it != names.end(); it ++) {
-		//cout << it << endl;
 		const char * str_to_send = (*it).c_str();
 		//write argument to socket
 		int err = write(client_socket, &str_to_send, sizeof(str_to_send));

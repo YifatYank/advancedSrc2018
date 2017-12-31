@@ -9,14 +9,18 @@
 #define SRC_CLIENT_CLIENTLISTCOMMAND_H_
 
 #include "ClientCommand.h"
+#include "Client.h"
 #include <vector>
 #include <string>
 using namespace std;
 
 
 class ClientListCommand: public ClientCommand {
+private:
+	string name_;
+	Client & client_;
 public:
-	ClientListCommand();
+	ClientListCommand(Client &client);
 	virtual string getName() = 0;
 	virtual bool execute();
 	virtual ~ClientListCommand();

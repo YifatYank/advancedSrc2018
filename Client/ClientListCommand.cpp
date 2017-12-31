@@ -5,6 +5,30 @@
  *      Author: shomps
  */
 
+#include "ClientListCommand.h"
+//#include <vector>
+#include <iostream>
 
+using namespace std;
+
+ClientListCommand::ClientListCommand(Client &client): client_(client) {
+	this->name_ = "list_games";
+}
+
+string ClientListCommand::getName() {
+	return this->name_;
+}
+
+bool ClientListCommand::execute() {
+	string rec;
+	do {
+		rec = this->client_.reciveString();
+		//names.push_back(rec);
+		cout << rec << endl;
+	} while (rec != "");
+	return true;
+}
+
+ClientListCommand::~ClientListCommand() {}
 
 

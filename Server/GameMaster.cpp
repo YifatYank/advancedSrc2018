@@ -45,6 +45,7 @@ vector<string> GameMaster::getGames() {
 	for (it = this->games_.begin(); it != this->games_.end(); it++) {
 		names.push_back(it->name_);
 	}
+	names.push_back("");
 	return names;
 }
 
