@@ -39,7 +39,7 @@ void GameMaster::removeGame(string name) {
 	}
 }
 
-vector<string> GameMaster::getGames() const {
+vector<string> GameMaster::getGames() {
 	vector<string> names;
 	vector<Game>::iterator it;
 	for (it = this->games_.begin(); it != this->games_.end(); it++) {
