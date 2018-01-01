@@ -19,6 +19,8 @@
 #include "ConsuleDisplay.h"
 #include "AIPlayer.h"
 #include "RemotePlayer.h"
+#include "Client.h"
+#include "ClientCommandsManager.h"
 
 using namespace std;
 /** Function name	: PrintBoard
@@ -39,66 +41,79 @@ int main() {
 	Player * second;
 	ConsuleDisplay gui = ConsuleDisplay();
 
-GameType type = gui.DisplayOpenMenu();
-	switch(type){
-		case(TWO_PLAYERS):{
-			first = new ConsolePlayer(WHITE);
-			second = new ConsolePlayer(BLACK);
-			break;
-		} case(AGAINST_COMPUTER):{
-			GameLogic * logic = new ClassicLogic(new Board(4));
-			first = new AIPlayer(WHITE, logic);
-			second = new ConsolePlayer(BLACK);
-			break;
-		} case (REMOTE_PALYER):{
-
-			Player * temp = new RemotePlayer();
-			if(temp->getValue() == WHITE){
-				second = temp;
-				first = new ConsolePlayer(BLACK);
-			} else {
-				first = temp;
-				second = new ConsolePlayer(WHITE);
-			}
-			break;
+	GameType type = gui.DisplayOpenMenu();
+	switch (type) {
+	case (TWO_PLAYERS): {
+		first = new ConsolePlayer(WHITE);
+		second = new ConsolePlayer(BLACK);
+		break;
+	}
+	case (AGAINST_COMPUTER): {
+		GameLogic * logic = new ClassicLogic(new Board(4));
+		first = new AIPlayer(WHITE, logic);
+		second = new ConsolePlayer(BLACK);
+		break;
+	}
+	case (REMOTE_PALYER): {
+		Player * temp = new RemotePlayer();
+		ClientCommandsManager commander = new ClientCommandsManager(
+						Client::getInctance(), &temp);
+		bool started = false;
+		string command;
+		do {
+			getline(cin, command);
+			started = commander.ExecuteCommand(command);
+		} while (!started);
+		//cout << "exited loop" << endl;
+		if (temp->getValue() == WHITE) {
+			second = temp;
+			first = new ConsolePlayer(BLACK);
+		} else {
+			first = temp;
+			second = new ConsolePlayer(WHITE);
 		}
+		break;
+	}
 	}
 
 	GameManager * manage = new GameManager(first, second, 4);
 	manage->play();
 
-	delete(manage);
-	delete(first);
-	delete(second);
+	delete (manage);
+	delete (first);
+	delete (second);
 	return 0;
 }
 
 //implementation of the printBoard function from above.
-void printBoard(Board &game){
+void printBoard(Board &game) {
 	int index, jndex;
 
 	cout << " |";
-	for(index = 1; index <= game.getGameBoardWidth(); ++index) {
+	for (index = 1; index <= game.getGameBoardWidth(); ++index) {
 		cout << " " << index << " |";
 	}
 	cout << endl << "----------------------------------" << endl;
 
-	for(index = 1; index <= game.getGameBoardWidth(); ++index) {
+	for (index = 1; index <= game.getGameBoardWidth(); ++index) {
 		cout << index << "|";
-		for(jndex = 1; jndex <=game.getGameBoardWidth(); ++ jndex) {
-			switch(game.getCellValue(index, jndex)) {
-				case(EMPTY): {
-					cout << "   |";
-					break;
-				} case(WHITE): {
-					cout << " O |";
-					break;
-				} case(BLACK): {
-					cout << " X |";
-					break;
-				} default: {
-					break;
-				}
+		for (jndex = 1; jndex <= game.getGameBoardWidth(); ++jndex) {
+			switch (game.getCellValue(index, jndex)) {
+			case (EMPTY): {
+				cout << "   |";
+				break;
+			}
+			case (WHITE): {
+				cout << " O |";
+				break;
+			}
+			case (BLACK): {
+				cout << " X |";
+				break;
+			}
+			default: {
+				break;
+			}
 			}
 		}
 		cout << endl << "----------------------------------" << endl;
