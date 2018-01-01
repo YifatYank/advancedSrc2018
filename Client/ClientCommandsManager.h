@@ -11,13 +11,15 @@
 #include <string>
 #include <map>
 #include "ClientCommand.h"
+#include "Client.h"
+#include "Player.h"
 using namespace std;
 
 class ClientCommandsManager {
 private:
 	map<string, ClientCommand *> command_map_;
 public:
-	ClientCommandsManager();
+	ClientCommandsManager(Client &client, Player ** player);
 	bool ExecuteCommand(string command);
 	vector<string> splitedString(string string_to_split, char delim);
 	virtual ~ClientCommandsManager();

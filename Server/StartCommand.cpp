@@ -41,6 +41,10 @@ void StartCommand::execute(vector<string> args) {
 	}
 }
 
+string StartCommand::getName() {
+	return this->name_;
+}
+
 StartCommand::~StartCommand() {
 }
 

@@ -6,8 +6,17 @@
  */
 
 #include "ClientCommandsManager.h"
+#include "ClientStartCommand.h"
+#include "ClientJoinCommand.h"
+#include "ClientListCommand.h"
 
-ClientCommandsManager::ClientCommandsManager() {
+ClientCommandsManager::ClientCommandsManager(Client &client, Player **player) {
+	ClientCommand * command = new ClientStartCommand(client, player);
+	this->command_map_[command->getName()] = command;
+	command = new ClientJoinCommand(client, player);
+	this->command_map_[command->getName()] = command;
+	command = new ClientListCommand(client);
+	this->command_map_[command->getName()] = command;
 }
 
 bool ClientCommandsManager::ExecuteCommand(string command) {
@@ -36,4 +45,9 @@ vector<string> ClientCommandsManager::splitedString(string string_to_split, char
 	return strings;
 }
 
-ClientCommandsManager::~ClientCommandsManager() {}
+ClientCommandsManager::~ClientCommandsManager() {
+	map<string, ClientCommand *>::iterator it;
+	for(it = this->command_map_.begin(); it != this->command_map_.end(); it++){
+		delete it->second;
+	}
+}

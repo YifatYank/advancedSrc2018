@@ -6,8 +6,17 @@
  */
 
 #include "CommandsManager.h"
+#include "StartCommand.h"
+#include "JoinCommand.h"
+#include "ListCommand.h"
 
 CommandsManager::CommandsManager(GameMaster & gamesList) : games_(gamesList) {
+	Command * command = new StartCommand(this->games_);
+	this->command_map_[command->getName()] = command;
+	command = new JoinCommand(this->games_);
+	this->command_map_[command->getName()] = command;
+	command = new ListCommand(this->games_);
+	this->command_map_[command->getName()] = command;
 }
 
 void CommandsManager::ExecuteCommand(string command, vector<string> args){

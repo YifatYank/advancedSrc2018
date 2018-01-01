@@ -21,9 +21,9 @@ private:
 	Player ** player_;
 public:
 	ClientJoinCommand(Client &client, Player **player);
-	virtual string getName() = 0;
-	virtual bool execute(string command) = 0;
-	virtual ~ClientJoinCommand(){}
+	virtual string getName();
+	virtual bool execute(string command);
+	virtual ~ClientJoinCommand();
 };
 
 
