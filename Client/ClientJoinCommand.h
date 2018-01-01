@@ -1,0 +1,27 @@
+/*
+ * ClientJoinCommand.h
+ *
+ *  Created on: Dec 31, 2017
+ *      Author: shomps
+ */
+
+#ifndef SRC_CLIENT_CLIENTJOINCOMMAND_H_
+#define SRC_CLIENT_CLIENTJOINCOMMAND_H_
+
+#include "Client.h"
+#include "ClientCommand.h"
+
+using namespace std;
+
+class ClientJoinCommand: public ClientCommand {
+private:
+	string name_;
+	Client & client_;
+public:
+	virtual string getName() = 0;
+	virtual bool execute(string command) = 0;
+	virtual ~ClientJoinCommand(){}
+};
+
+
+#endif /* SRC_CLIENT_CLIENTJOINCOMMAND_H_ */

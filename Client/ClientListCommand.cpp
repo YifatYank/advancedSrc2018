@@ -19,14 +19,15 @@ string ClientListCommand::getName() {
 	return this->name_;
 }
 
-bool ClientListCommand::execute() {
+bool ClientListCommand::execute(string command) {
+	this->client_.sendString(command);
 	string rec;
 	do {
 		rec = this->client_.reciveString();
 		//names.push_back(rec);
 		cout << rec << endl;
 	} while (rec != "");
-	return true;
+	return false;
 }
 
 ClientListCommand::~ClientListCommand() {}

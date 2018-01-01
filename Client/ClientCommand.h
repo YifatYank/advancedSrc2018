@@ -16,7 +16,7 @@ using namespace std;
 class ClientCommand {
 public:
 	virtual string getName() = 0;
-	virtual bool execute() = 0;
+	virtual bool execute(string command) = 0;
 	virtual ~ClientCommand(){}
 };
 

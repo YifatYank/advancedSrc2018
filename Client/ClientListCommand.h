@@ -21,8 +21,8 @@ private:
 	Client & client_;
 public:
 	ClientListCommand(Client &client);
-	virtual string getName() = 0;
-	virtual bool execute();
+	virtual string getName();
+	virtual bool execute(string command);
 	virtual ~ClientListCommand();
 };
 
