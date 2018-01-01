@@ -5,7 +5,8 @@
  *      Author: yifat
  */
 
-#include "joinCommand.h"
+#include "JoinCommand.h"
+
 #include "StartCommand.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -16,29 +17,37 @@
 #include <stdlib.h>
 #include <fstream>
 
-joinCommand::joinCommand(GameMaster & games_master) :
+JoinCommand::JoinCommand(GameMaster & games_master) :
 		games_(games_master) {
 	this->name_ = "join";
 }
 
-void joinCommand::execute(vector<string> args) {
+void JoinCommand::execute(vector<string> args) {
 	string game_name = args.back();
 	args.back();
 	string client_socket_str = args.back();
 	int client_socket = this->string_to_int(client_socket_str);
+	int return_value = 0;
 
 	// Get from the game master the game the user want to join.
 	Game game = this->games_.joinGame(game_name);
 
 	// If the game is a legal game
 	if (game.name_ != "" && game.socket_ != -1) {
-		// Todo - return to the client a value that will indicate the game name in not valid.
+		return_value = -1;
+	}
+
+	int err = 0;
+
+	err = write(client_socket, &return_value, sizeof(return_value));
+	if (err == -1) {
+		throw "Error (writing num2)";
+		exit(-1);
 	}
 
 	int client_socket1 = game.socket_;
 	int client_socekt2 = client_socket;
 	int num1, num2;
-	int err;
 	while (true) {
 		//read new arguments from client1
 		err = read(client_socket1, &num1, sizeof(num1));
@@ -104,5 +113,9 @@ void joinCommand::execute(vector<string> args) {
 	close(client_socekt2);
 }
 
-joinCommand::~joinCommand() {}
+string JoinCommand::getName() {
+	return this->name_ ;
+}
+
+JoinCommand::~JoinCommand() {}
 

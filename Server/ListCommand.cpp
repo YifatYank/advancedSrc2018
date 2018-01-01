@@ -41,4 +41,8 @@ void ListCommand::execute(vector<string> args) {
 	}
 }
 
+string ListCommand::getName() {
+	return this->name_;
+}
+
 ListCommand::~ListCommand() {}

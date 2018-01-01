@@ -11,14 +11,15 @@
 #include "Command.h"
 #include "GameMaster.h"
 
-class joinCommand: public Command {
+class JoinCommand: public Command {
 private:
 	string name_;
 	GameMaster & games_;
 public:
-	joinCommand(GameMaster & games_master);
+	JoinCommand(GameMaster & games_master);
+	virtual string getName();
 	virtual void execute(vector <string> args);
-	virtual ~joinCommand();
+	virtual ~JoinCommand();
 };
 
 #endif /* SERVER_JOINCOMMAND_H_ */
