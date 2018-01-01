@@ -39,6 +39,9 @@ RemotePlayer::RemotePlayer() :
 	}
 }
 
+RemotePlayer::RemotePlayer(CellValue value) : value_(value),client_(Client()), first_t_(true) {
+}
+
 CellValue RemotePlayer::getValue() const {
 	return this->value_;
 }

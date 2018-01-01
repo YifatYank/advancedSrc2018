@@ -51,6 +51,7 @@ GameType type = gui.DisplayOpenMenu();
 			second = new ConsolePlayer(BLACK);
 			break;
 		} case (REMOTE_PALYER):{
+
 			Player * temp = new RemotePlayer();
 			if(temp->getValue() == WHITE){
 				second = temp;

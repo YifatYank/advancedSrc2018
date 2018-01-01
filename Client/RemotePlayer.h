@@ -19,6 +19,7 @@ private:
 
 public:
 	RemotePlayer();
+	RemotePlayer(CellValue value);
 
 	/** Function name	: getValue
 	 *  Parameters		: None.

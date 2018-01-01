@@ -7,12 +7,27 @@
 
 #include "ClientStartCommand.h"
 
-ClientStartCommand::ClientStartCommand() {
-	// TODO Auto-generated constructor stub
-
+ClientStartCommand::ClientStartCommand(Client &client, Player ** player): client_(client) {
+	this->name_= "start";
+	this->player = player;
 }
 
-ClientStartCommand::~ClientStartCommand() {
-	// TODO Auto-generated destructor stub
+string ClientStartCommand::getName(){
+	return this->name_;
 }
+
+bool ClientStartCommand::execute(string command) {
+	int err;
+	this->client_.sendString(command);
+	err =  client_.reciveInt();
+
+	// If the game has created
+	if(err == 0){
+		//create the clients
+		return true;
+	}
+	return false;
+}
+
+ClientStartCommand::~ClientStartCommand() {}
 
