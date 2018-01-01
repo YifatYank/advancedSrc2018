@@ -6,6 +6,7 @@
  */
 
 #include "ClientStartCommand.h"
+#include "RemotePlayer.h"
 
 ClientStartCommand::ClientStartCommand(Client &client, Player ** player): client_(client) {
 	this->name_= "start";
@@ -23,7 +24,7 @@ bool ClientStartCommand::execute(string command) {
 
 	// If the game has created
 	if(err == 0){
-		//create the clients
+		*(this->player) = new RemotePlayer(WHITE);
 		return true;
 	}
 	return false;
