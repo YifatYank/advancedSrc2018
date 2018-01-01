@@ -6,6 +6,7 @@
  */
 
 #include "ClientJoinCommand.h"
+#include "RemotePlayer.h"
 
 using namespace std;
 
@@ -21,7 +22,11 @@ string ClientJoinCommand::getName() {
 bool ClientJoinCommand::execute(string command) {
 	this->client_.sendString(command);
 	int res = this->client_.reciveInt();
-	return (res == 0 ? true : false);
+	if (res == 0) {
+		*(this->player_) = new RemotePlayer(BLACK);
+		return true;
+	}
+	return false;
 }
 ClientJoinCommand::~ClientJoinCommand() {
 }
