@@ -33,7 +33,7 @@ void StartCommand::execute(vector<string> args) {
 		return_code = -1;
 	}
 
-	//
+	// Returns to the client if the game has started.
 	err = write(client_socket, &return_code, sizeof(return_code));
 	if (err == -1) {
 		throw "Error (writing num1)";

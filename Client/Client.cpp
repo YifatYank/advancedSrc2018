@@ -25,13 +25,31 @@ using namespace std;
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 8000
 
-Client::Client() :server_ip_(SERVER_IP), server_port_(SERVER_PORT), client_socket_(0) {
+Client *Client::instane = 0;
+
+Client * Client::getInctance() {
+	if (instane == 0) {
+		instane = Client();
+	}
+	return instane;
+}
+
+void Client::ResetInstace() {
+	if (instane != 0) {
+		delete (instane);
+		instane = 0;
+	}
+}
+
+Client::Client() :
+		server_ip_(SERVER_IP), server_port_(SERVER_PORT), client_socket_(0) {
 	setConfigs();
 	cout << "Client constructed" << endl;
 }
 
-Client::Client(const char *server_ip, int server_port) : server_port_(server_port), client_socket_(0) {
-	strcpy(this->server_ip_,server_ip);
+Client::Client(const char *server_ip, int server_port) :
+		server_port_(server_port), client_socket_(0) {
+	strcpy(this->server_ip_, server_ip);
 	cout << "Client constructed" << endl;
 }
 
@@ -63,7 +81,8 @@ void Client::connectToServer() {
 	server_address.sin_port = htons(this->server_port_);
 
 	//establish connection with TCP server
-	if (connect(this->client_socket_, (struct sockaddr*)&server_address, sizeof(server_address)) == -1) {
+	if (connect(this->client_socket_, (struct sockaddr*) &server_address,
+			sizeof(server_address)) == -1) {
 		throw "Error (connecting to server)";
 	}
 //	cout << "Connected to server" << endl;
@@ -78,7 +97,7 @@ void Client::sendInt(int num) {
 	}
 }
 
-int Client::reciveInt(){
+int Client::reciveInt() {
 	int num, err;
 	err = read(this->client_socket_, &num, sizeof(num));
 	if (err == -1) {
@@ -87,14 +106,14 @@ int Client::reciveInt(){
 	return num;
 }
 
-void Client::disconnectFromServer(){
-	if(close(this->client_socket_) == -1){
+void Client::disconnectFromServer() {
+	if (close(this->client_socket_) == -1) {
 		throw "Error (disconnecting from server)";
 	}
 }
 
 void Client::setConfigs() {
-	const char filename[20] =	"./config.txt";
+	const char filename[20] = "./config.txt";
 	ifstream inFile(filename);
 
 	// Make sure the file stream is good
@@ -104,13 +123,13 @@ void Client::setConfigs() {
 	}
 
 	int port;
-	char  ip[20];
+	char ip[20];
 	inFile >> port >> ip;
 	this->server_port_ = port;
-	strcpy(this->server_ip_,ip);
+	strcpy(this->server_ip_, ip);
 }
 
-void Client::sendString(string str){
+void Client::sendString(string str) {
 	const char * str_to_send = str.c_str();
 	//write argument to socket
 	int err = write(this->client_socket_, &str_to_send, sizeof(str_to_send));
@@ -119,7 +138,7 @@ void Client::sendString(string str){
 	}
 }
 
-string Client::reciveString(){
+string Client::reciveString() {
 	int err;
 	char buffer[BUFFER_SIZE];
 	err = read(this->client_socket_, buffer, BUFFER_SIZE);
@@ -129,3 +148,4 @@ string Client::reciveString(){
 	string str = string(buffer);
 	return buffer;
 }
+

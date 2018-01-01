@@ -8,6 +8,7 @@
 #include "CommandsManager.h"
 
 CommandsManager::CommandsManager(GameMaster & gamesList) : games_(gamesList) {
+
 }
 
 void CommandsManager::ExecuteCommand(string command, vector<string> args){
