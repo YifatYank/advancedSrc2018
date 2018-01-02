@@ -30,12 +30,14 @@ Client *Client::instance = 0;
 Client * Client::getInctance() {
 	if (instance == 0) {
 		instance = new Client();
+		instance->connectToServer();
 	}
 	return instance;
 }
 
 void Client::ResetInstace() {
 	if (instance != 0) {
+		instance->disconnectFromServer();
 		delete (instance);
 		instance = 0;
 	}

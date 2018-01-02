@@ -24,7 +24,6 @@ bool ClientListCommand::execute(string command) {
 	string rec;
 	do {
 		rec = this->client_.reciveString();
-		//names.push_back(rec);
 		cout << rec << endl;
 	} while (rec != "");
 	return false;
