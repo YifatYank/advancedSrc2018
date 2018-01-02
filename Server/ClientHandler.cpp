@@ -19,6 +19,10 @@ void ClientHandler::handleClient(int client_socket){
 	char buffer[BUFFER_SIZE];
 	int err;
 
+	for(int index = 0; index < BUFFER_SIZE; ++index){
+		buffer[index] = '0';
+	}
+
 	err = read(client_socket, buffer, BUFFER_SIZE);
 	if (err == -1) {
 		cout << "Error (reading num1)" << endl;

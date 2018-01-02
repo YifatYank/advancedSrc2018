@@ -27,7 +27,7 @@ public:
 			++index;
 		}
 		// Goes through the string until its end, and while the character within the string are digits.
-		for(; index < str.size() && str[index] <= '0' && str[index] <= '9'; ++index) {
+		for(; index < str.size() && str[index] >= '0' && str[index] <= '9'; ++index) {
 			// Get the current character and convert it's acsii value to its numeric value.
 			digit = str[index];
 			digit -= '0';

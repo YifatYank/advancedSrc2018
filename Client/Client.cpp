@@ -134,7 +134,7 @@ void Client::setConfigs() {
 void Client::sendString(string str) {
 	const char * str_to_send = str.c_str();
 	//write argument to socket
-	int err = write(this->client_socket_, &str_to_send, sizeof(str_to_send));
+	int err = write(this->client_socket_, str_to_send, str.size());
 	if (err == -1) {
 		throw "Error (writing a to socket)";
 	}
@@ -143,6 +143,11 @@ void Client::sendString(string str) {
 string Client::reciveString() {
 	int err;
 	char buffer[BUFFER_SIZE];
+
+	for(int index = 0; index < BUFFER_SIZE; ++index){
+		buffer[index] = '0';
+	}
+
 	err = read(this->client_socket_, buffer, BUFFER_SIZE);
 	if (err == -1) {
 		throw "Error (reading result from socket)";
