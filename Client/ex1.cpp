@@ -59,9 +59,15 @@ int main() {
 		ClientCommandsManager commander = ClientCommandsManager(
 						*(Client::getInctance()), &temp);
 		bool started = false;
-		string command;
+		string command, name;
 		do {
 			cin >> command;
+			if(command != "list_games"){
+				cin >> name;
+				command += " ";
+				command += name;
+			}
+
 			started = commander.ExecuteCommand(command);
 		} while (!started);
 		//cout << "exited loop" << endl;

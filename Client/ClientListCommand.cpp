@@ -20,12 +20,15 @@ string ClientListCommand::getName() {
 }
 
 bool ClientListCommand::execute(string command) {
+	int hand_shake = 0;
 	this->client_.sendString(command);
 	string rec;
 	do {
 		rec = this->client_.reciveString();
+		this->client_.sendInt(hand_shake);
+
 		cout << rec << endl;
-	} while (rec != "");
+	} while (rec != " ");
 	return false;
 }
 

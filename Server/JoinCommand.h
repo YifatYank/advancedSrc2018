@@ -18,7 +18,7 @@ private:
 public:
 	JoinCommand(GameMaster & games_master);
 	virtual string getName();
-	virtual void execute(vector <string> args);
+	virtual bool execute(vector <string> args);
 	virtual ~JoinCommand();
 };
 

@@ -145,10 +145,10 @@ string Client::reciveString() {
 	char buffer[BUFFER_SIZE];
 
 	for(int index = 0; index < BUFFER_SIZE; ++index){
-		buffer[index] = '0';
+		buffer[index] = 0;
 	}
 
-	err = read(this->client_socket_, buffer, BUFFER_SIZE);
+	err = read(this->client_socket_,buffer, BUFFER_SIZE);
 	if (err == -1) {
 		throw "Error (reading result from socket)";
 	}

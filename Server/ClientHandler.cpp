@@ -18,34 +18,36 @@ void ClientHandler::handleClient(int client_socket){
 	// Read from the client his command
 	char buffer[BUFFER_SIZE];
 	int err;
+	bool started= false;
+	do {
+		for(int index = 0; index < BUFFER_SIZE; ++index){
+			buffer[index] = 0;
+		}
 
-	for(int index = 0; index < BUFFER_SIZE; ++index){
-		buffer[index] = '0';
-	}
+		err = read(client_socket, buffer, BUFFER_SIZE);
+		if (err == -1) {
+			cout << "Error (reading num1)" << endl;
+			return;
+		}
+		if (err == 0) {
+			cout << "Client 1 disconnected" << endl;
+			return;
+		}
 
-	err = read(client_socket, buffer, BUFFER_SIZE);
-	if (err == -1) {
-		cout << "Error (reading num1)" << endl;
-		return;
-	}
-	if (err == 0) {
-		cout << "Client 1 disconnected" << endl;
-		return;
-	}
+		// Separate the client command in to words
+		vector<string> strings = this->splitedString(string(buffer),' ');
 
-	// Separate the client command in to words
-	vector<string> strings = this->splitedString(string(buffer),' ');
+		// Takes the command name out of the splitedString
+		string command_name = strings.front();
+		strings.erase(strings.begin());
 
-	// Takes the command name out of the splitedString
-	string command_name = strings.back();
-	strings.pop_back();
+		// Puts the client socket in the command params
+		string client_socket_String = this->intToString(client_socket);
+		strings.push_back(client_socket_String);
 
-	// Puts the client socket in the command params
-	string client_socket_String = this->intToString(client_socket);
-	strings.push_back(client_socket_String);
-
-	// Execute the command
-	this->commandsSet_->ExecuteCommand(command_name, strings);
+		// Execute the command
+		this->commandsSet_->ExecuteCommand(command_name, strings);
+	} while (!started);
 }
 
 ClientHandler::~ClientHandler() {

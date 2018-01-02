@@ -21,7 +21,7 @@ ClientCommandsManager::ClientCommandsManager(Client &client, Player **player) {
 
 bool ClientCommandsManager::ExecuteCommand(string command) {
 	vector<string> strings = this->splitedString(command,' ');
-	string command_name = strings.back();
+	string command_name = strings.front();
 	ClientCommand * command_to_do = this->command_map_[command_name];
 	return (command_to_do->execute(command));
 }

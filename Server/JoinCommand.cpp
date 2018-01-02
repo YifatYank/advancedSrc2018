@@ -22,7 +22,7 @@ JoinCommand::JoinCommand(GameMaster & games_master) :
 	this->name_ = "join";
 }
 
-void JoinCommand::execute(vector<string> args) {
+bool JoinCommand::execute(vector<string> args) {
 	string game_name = args.back();
 	args.back();
 	string client_socket_str = args.back();
@@ -45,6 +45,10 @@ void JoinCommand::execute(vector<string> args) {
 		exit(-1);
 	}
 
+	if (return_value == -1) {
+		return false;
+	}
+
 	int client_socket1 = game.socket_;
 	int client_socekt2 = client_socket;
 	int num1, num2;
@@ -53,7 +57,7 @@ void JoinCommand::execute(vector<string> args) {
 		err = read(client_socket1, &num1, sizeof(num1));
 		if (err == -1) {
 			throw "Error (reading num1)";
-			return;
+			return false;
 		}
 		if (err == 0) {
 			cout << "Client 1 disconnected" << endl;
@@ -111,6 +115,7 @@ void JoinCommand::execute(vector<string> args) {
 	}
 	close(client_socket1);
 	close(client_socekt2);
+	return true;
 }
 
 string JoinCommand::getName() {

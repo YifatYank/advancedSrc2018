@@ -15,7 +15,7 @@ using namespace std;
 class Command{
 public:
 	virtual string getName() = 0;
-	virtual void execute(vector <string> args) = 0;
+	virtual bool execute(vector <string> args) = 0;
 	virtual ~Command(){}
 	int string_to_int(string str){
 		int num = 1;

@@ -20,7 +20,7 @@ StartCommand::StartCommand(GameMaster & games_master) :
 	this->name_ = "start";
 }
 
-void StartCommand::execute(vector<string> args) {
+bool StartCommand::execute(vector<string> args) {
 	int err, return_code = 0;
 	string game_name = args.back();
 	args.back();
@@ -37,8 +37,10 @@ void StartCommand::execute(vector<string> args) {
 	err = write(client_socket, &return_code, sizeof(return_code));
 	if (err == -1) {
 		throw "Error (writing num1)";
-		return;
+		return false;
 	}
+
+	return (return_code == -1 ? false : true);
 }
 
 string StartCommand::getName() {

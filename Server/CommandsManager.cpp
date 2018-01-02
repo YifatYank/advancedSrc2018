@@ -23,9 +23,9 @@ CommandsManager::CommandsManager(GameMaster & gamesList) :
 	this->command_map_[command->getName()] = command;
 }
 
-void CommandsManager::ExecuteCommand(string command, vector<string> args) {
+bool CommandsManager::ExecuteCommand(string command, vector<string> args) {
 	Command * command_to_do = this->command_map_[command];
-	command_to_do->execute(args);
+	return command_to_do->execute(args);
 }
 
 CommandsManager::~CommandsManager() {

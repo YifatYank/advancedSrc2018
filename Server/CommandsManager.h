@@ -20,7 +20,7 @@ private:
 	GameMaster & games_;
 public:
 	CommandsManager(GameMaster & gamesList);
-	void ExecuteCommand(string command, vector<string> args);
+	bool ExecuteCommand(string command, vector<string> args);
 	virtual ~CommandsManager();
 };
 

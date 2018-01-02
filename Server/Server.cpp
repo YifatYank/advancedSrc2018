@@ -78,7 +78,7 @@ void Server::start() {
 
 		this->handler_.handleClient(client_socket);
 		// Todo - something with lst of all the open sokets.
-		close(client_socket);
+		//close(client_socket);
 	}
 }
 
