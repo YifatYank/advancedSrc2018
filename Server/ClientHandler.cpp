@@ -46,7 +46,7 @@ void ClientHandler::handleClient(int client_socket){
 		strings.push_back(client_socket_String);
 
 		// Execute the command
-		this->commandsSet_->ExecuteCommand(command_name, strings);
+		started = this->commandsSet_->ExecuteCommand(command_name, strings);
 	} while (!started);
 }
 

@@ -23,8 +23,7 @@ JoinCommand::JoinCommand(GameMaster & games_master) :
 }
 
 bool JoinCommand::execute(vector<string> args) {
-	string game_name = args.back();
-	args.back();
+	string game_name = args.front();
 	string client_socket_str = args.back();
 	int client_socket = this->string_to_int(client_socket_str);
 	int return_value = 0;
