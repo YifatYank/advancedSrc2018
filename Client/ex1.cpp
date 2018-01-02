@@ -56,8 +56,8 @@ int main() {
 	}
 	case (REMOTE_PALYER): {
 		Player * temp = new RemotePlayer();
-		ClientCommandsManager commander = new ClientCommandsManager(
-						Client::getInctance(), &temp);
+		ClientCommandsManager commander = ClientCommandsManager(
+						*(Client::getInctance()), &temp);
 		bool started = false;
 		string command;
 		do {

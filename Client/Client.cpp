@@ -29,7 +29,7 @@ Client *Client::instance = 0;
 
 Client * Client::getInctance() {
 	if (instance == 0) {
-		*instance = Client();
+		instance = new Client();
 	}
 	return instance;
 }
@@ -149,3 +149,4 @@ string Client::reciveString() {
 	return buffer;
 }
 
+Client::~Client() {}
