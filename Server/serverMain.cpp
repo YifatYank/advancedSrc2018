@@ -8,8 +8,8 @@
 #define PORT 8002
 
 int main(){
-	//Server server(PORT);
-	//server.start();
-	//server.stop();
+	Server server(PORT);
+	server.start();
+	server.stop();
 	return 0;
 }

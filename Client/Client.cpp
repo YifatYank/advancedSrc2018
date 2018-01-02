@@ -25,19 +25,19 @@ using namespace std;
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 8000
 
-Client *Client::instane = 0;
+Client *Client::instance = 0;
 
 Client * Client::getInctance() {
-	if (instane == 0) {
-		instane = Client();
+	if (instance == 0) {
+		*instance = Client();
 	}
-	return instane;
+	return instance;
 }
 
 void Client::ResetInstace() {
-	if (instane != 0) {
-		delete (instane);
-		instane = 0;
+	if (instance != 0) {
+		delete (instance);
+		instance = 0;
 	}
 }
 
