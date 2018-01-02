@@ -5,10 +5,12 @@
  *      Author: yifat
  */
 #include "Server.h"
+#include "ClientHandler.h"
 #define PORT 8002
 
 int main(){
-	Server server(PORT);
+	ClientHandler handle = ClientHandler();
+	Server server(PORT, handle);
 	server.start();
 	server.stop();
 	return 0;

@@ -55,13 +55,13 @@ int main() {
 		break;
 	}
 	case (REMOTE_PALYER): {
-		Player * temp = new RemotePlayer();
+		Player * temp;
 		ClientCommandsManager commander = ClientCommandsManager(
 						*(Client::getInctance()), &temp);
 		bool started = false;
 		string command;
 		do {
-			getline(cin, command);
+			cin >> command;
 			started = commander.ExecuteCommand(command);
 		} while (!started);
 		//cout << "exited loop" << endl;
