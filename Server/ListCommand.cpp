@@ -21,6 +21,7 @@ ListCommand::ListCommand(GameMaster & games_master) :
 		games_(games_master) {
 	this->name_ = "list_games";
 }
+
 bool ListCommand::execute(vector<string> args) {
 	string client_socket_str = args.back();
 	int hand_shake;

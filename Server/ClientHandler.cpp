@@ -113,7 +113,7 @@ string ClientHandler::intToString(int num){
 	return str;
 }
 
-void * handleCLientThread(void * params){
+void * ClientHandler::handleCLientThread(void * params){
 	ParamsToHandleCLientThread * handle_params = (ParamsToHandleCLientThread *)params;
 
 	// Read from the client his command
@@ -154,6 +154,8 @@ void * handleCLientThread(void * params){
 	pthread_exit(NULL);
 return NULL;
 }
+
+
 
 GameMaster *ClientHandler::getGameMaster(){
 	return this->games_;
