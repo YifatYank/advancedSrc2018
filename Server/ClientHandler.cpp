@@ -13,7 +13,7 @@ ClientHandler::ClientHandler(SocketManager * sockets , ThreadManager * threads) 
 	this->sockets_ = sockets;
 	this->threads_ = threads;
 	this->games_ = new GameMaster();
-	this->commandsSet_= new CommandsManager(*(this->games_), this->threads_);
+	this->commandsSet_= new CommandsManager(*(this->games_), this->sockets_);
 }
 
 void ClientHandler::handleClient(int client_socket){
