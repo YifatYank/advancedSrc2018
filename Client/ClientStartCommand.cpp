@@ -19,6 +19,7 @@ string ClientStartCommand::getName(){
 
 bool ClientStartCommand::execute(string command) {
 	int err;
+	string message;
 	this->client_.sendString(command);
 	err =  client_.reciveInt();
 
@@ -27,7 +28,7 @@ bool ClientStartCommand::execute(string command) {
 		*(this->player) = new RemotePlayer(WHITE, *Client::getInctance());
 		//wait for a handshake from the server.
 		//the handshake confirms another player has joined
-		err = this->client_.reciveInt();
+		message = this->client_.reciveString();
 		return true;
 	}
 	return false;

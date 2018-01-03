@@ -25,6 +25,7 @@ bool ClientListCommand::execute(string command) {
 	string rec;
 	do {
 		rec = this->client_.reciveString();
+		//if (rec == "_red_button_")
 		this->client_.sendInt(hand_shake);
 
 		cout << rec << endl;

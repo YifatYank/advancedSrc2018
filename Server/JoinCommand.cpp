@@ -54,8 +54,8 @@ bool JoinCommand::execute(vector<string> args) {
 	int client_socket1 = game.socket_;
 	int client_socekt2 = client_socket;
 	//notify first player that the game may begin
-	int handshake = 0;
-	err = write(client_socket1, &handshake, sizeof(handshake));
+	string handshake = "0";
+	err = write(client_socket1, &handshake, handshake.size());
 	if (err == -1) {
 		throw "Error (handshake)";
 		exit(-1);

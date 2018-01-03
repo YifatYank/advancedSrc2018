@@ -204,7 +204,7 @@ void * Server::OuterThread(void * params) {
 	int err;
 	vector<int>::iterator it;
 	for (it = waiting.begin(); it != waiting.end(); it++) {
-		err = write(*it, &destroy, sizeof(destroy));
+		err = write(*it, &destroy, destroy.size());
 		if (err == -1) {
 			throw "Error (destroying client)";
 			exit(-1);
