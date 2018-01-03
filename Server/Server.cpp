@@ -46,12 +46,14 @@ Server::Server(int port, ClientHandler & client_handler,
 void Server::start() {
 	ParamsToOuterThread * params = (ParamsToOuterThread*) malloc(
 			sizeof(ParamsToOuterThread));
-	params = ParamsToOuterThread { this->threads_, this->sockets_,
-			this->handler_.getGameMaster(), this };
+	params->server = this;
+	params->threads = this->threads_;
+	params->sockets = this->sockets_;
+	params->games = this->handler_.getGameMaster();
 	int errno;
 	pthread_t threadno;
 	// Create the thread and send the arguments to it.
-	errno = pthread_create(&threadno, NULL, ClientHandler::handleCLientThread,
+	errno = pthread_create(&threadno, NULL, Server::OuterThread,
 			(void *) params);
 
 	int client_socket;
@@ -69,7 +71,7 @@ void Server::start() {
 	server_address1.sin_family = AF_INET;
 	server_address1.sin_addr.s_addr = INADDR_ANY;
 	server_address1.sin_port = htons(this->port_);
-	int errno = bind(this->server_socket_1_,
+	errno = bind(this->server_socket_1_,
 			(struct sockaddr*) &server_address1, sizeof(server_address1));
 	if (errno == -1) {
 		throw "Error (binding 1)";
@@ -187,7 +189,7 @@ void Server::setConfigs() {
 	this->port_ = port;
 }
 
-static void * Server::OuterThread(void * params) {
+void * Server::OuterThread(void * params) {
 	string message;
 	do {
 		cin >> message;
