@@ -17,9 +17,10 @@
 #include <stdlib.h>
 #include <fstream>
 
-JoinCommand::JoinCommand(GameMaster & games_master) :
+JoinCommand::JoinCommand(GameMaster & games_master, SocketManager * sockets) :
 		games_(games_master) {
 	this->name_ = "join";
+	this->sockets_= sockets;
 }
 
 bool JoinCommand::execute(vector<string> args) {
@@ -122,7 +123,9 @@ bool JoinCommand::execute(vector<string> args) {
 		}
 	}
 	close(client_socket1);
+	this->sockets_->removeSocket(client_socket1);
 	close(client_socekt2);
+	this->sockets_->removeSocket(client_socekt2);
 	return true;
 }
 

@@ -11,6 +11,8 @@
 #include "CommandsManager.h"
 #include "ServerDefinitions.h"
 #include "GameMaster.h"
+#include "ThreadManager.h"
+#include "SocketManager.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -28,15 +30,17 @@ using namespace std;
 
 class ClientHandler {
 private:
+	SocketManager * sockets_;
+	ThreadManager * threads_;
 	CommandsManager * commandsSet_;
 	GameMaster * games_;
-	static void * handleCLientThead(void * params);
 
+	static void * handleCLientThread(void * params);
 	vector<string> splitedString(string string_to_split, char delim);
 	string intToString(int num);
 	int stringToInt(string str);
 public:
-	ClientHandler();
+	ClientHandler(SocketManager * sockets ,ThreadManager * threads);
 	void handleClient(int client_socket);
 	virtual ~ClientHandler();
 };

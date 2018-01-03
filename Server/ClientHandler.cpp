@@ -7,16 +7,24 @@
 
 #include "ClientHandler.h"
 #include <stdlib.h>
+#include <pthread.h>
 
-
-ClientHandler::ClientHandler() {
+ClientHandler::ClientHandler(SocketManager * sockets , ThreadManager * threads) {
+	this->sockets_ = sockets;
+	this->threads_ = threads;
 	this->games_ = new GameMaster();
 	this->commandsSet_= new CommandsManager(*(this->games_));
 }
 
 void ClientHandler::handleClient(int client_socket){
 	ParamsToHandleCLientThread * params = (ParamsToHandleCLientThread *)malloc(sizeof(ParamsToHandleCLientThread ));
-	/*// Read from the client his command
+	int errno;
+	pthread_t threadno;
+	// Create the thread and send the arguments to it.
+	errno = pthread_create(&threadno, NULL, ClientHandler::handleCLientThread, (void *) params);
+
+	this->threads_->addThread(threadno);
+/*// Read from the client his command
 	char buffer[BUFFER_SIZE];
 	int err;
 	bool started= false;
@@ -52,7 +60,8 @@ void ClientHandler::handleClient(int client_socket){
 }
 
 ClientHandler::~ClientHandler() {
-	free(this->commandsSet_);	free(this->games_);
+	free(this->commandsSet_);
+	free(this->games_);
 }
 
 vector<string> ClientHandler::splitedString(string string_to_split, char delim){
@@ -98,7 +107,7 @@ string ClientHandler::intToString(int num){
 	return str;
 }
 
-void * handleCLientThead(void * params){
+void * handleCLientThread(void * params){
 	ParamsToHandleCLientThread * handle_params = (ParamsToHandleCLientThread) * params;
 
 	// Read from the client his command

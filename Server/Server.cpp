@@ -25,14 +25,21 @@ using namespace std;
 #define BACK_LOG 10
 #define PORT 8000
 
-Server::Server(ClientHandler & client_handler): port_(PORT) , server_socket_1_(0) , handler_(client_handler){
+Server::Server(ClientHandler & client_handler, SocketManager * sockets,
+		ThreadManager * threads) :
+		port_(PORT), server_socket_1_(0), handler_(client_handler) {
 	setConfigs();
+	this->threads_ = threads;
+	this->sockets_ = sockets;
 	//cout << "SERVER CONSTRUCTED!" << endl;
 }
 
-Server::Server(int port, ClientHandler & client_handler)
-		: port_(port), server_socket_1_(0) ,  handler_(client_handler) {
+Server::Server(int port, ClientHandler & client_handler,
+		SocketManager * sockets, ThreadManager * threads) :
+		port_(port), server_socket_1_(0), handler_(client_handler) {
 	setConfigs();
+	this->threads_ = threads;
+	this->sockets_ = sockets;
 	//cout << "SERVER CONSTRUCTED!" << endl;
 }
 
@@ -62,7 +69,7 @@ void Server::start() {
 	//start listening to incoming connections
 	listen(this->server_socket_1_, BACK_LOG);
 
-	while(true){
+	while (true) {
 		//define the client socket structures
 		struct sockaddr_in client_address;
 		socklen_t client_address_len = sizeof(client_address);
@@ -76,9 +83,10 @@ void Server::start() {
 			continue;
 		}
 
+		// Add the client's socket to the list of sockets in SocketManager
+		this->sockets_->addSocket(client_socket);
 		this->handler_.handleClient(client_socket);
-		// Todo - something with lst of all the open sokets.
-		//close(client_socket);
+		close(client_socket); // Todo crash check!
 	}
 }
 
@@ -121,7 +129,8 @@ void Server::handleClient(int client_socket1, int client_socket2) {
 		n = read(client_socket2, &num1, sizeof(num1));
 		if (n == -1) {
 			throw "Error (reading num1)";
-			exit(-1);		}
+			exit(-1);
+		}
 		if (n == 0) {
 			cout << "Client 2 disconnected" << endl;
 			return;
@@ -151,9 +160,11 @@ void Server::stop() {
 	close(this->server_socket_1_);
 }
 
+Server::~Server() {
+}
+
 void Server::setConfigs() {
-	const char* filename =
-			"./config.txt";
+	const char* filename = "./config.txt";
 	std::ifstream inFile(filename);
 
 	// Make sure the file stream is good
