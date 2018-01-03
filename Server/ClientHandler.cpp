@@ -13,7 +13,7 @@ ClientHandler::ClientHandler(SocketManager * sockets , ThreadManager * threads) 
 	this->sockets_ = sockets;
 	this->threads_ = threads;
 	this->games_ = new GameMaster();
-	this->commandsSet_= new CommandsManager(*(this->games_));
+	this->commandsSet_= new CommandsManager(*(this->games_), this->threads_);
 }
 
 void ClientHandler::handleClient(int client_socket){
@@ -64,6 +64,10 @@ ClientHandler::~ClientHandler() {
 	free(this->games_);
 }
 
+CommandsManager * ClientHandler::getCommandSet(){
+	return this->commandsSet_;
+}
+
 vector<string> ClientHandler::splitedString(string string_to_split, char delim){
 	vector<string> strings;
 	int size = string_to_split.size();
@@ -108,7 +112,7 @@ string ClientHandler::intToString(int num){
 }
 
 void * handleCLientThread(void * params){
-	ParamsToHandleCLientThread * handle_params = (ParamsToHandleCLientThread) * params;
+/*	ParamsToHandleCLientThread * handle_params = (ParamsToHandleCLientThread) * params;
 
 	// Read from the client his command
 	char buffer[BUFFER_SIZE];
@@ -145,5 +149,10 @@ void * handleCLientThread(void * params){
 		started = handle_params->handler_->commandsSet_->ExecuteCommand(command_name, strings);
 	} while (!started);
 	free(handle_params);
-	pthread_exit(NULL);
+	pthread_exit(NULL);*/
+return NULL;
+}
+
+GameMaster *ClientHandler::getGameMaster(){
+	return this->games_;
 }

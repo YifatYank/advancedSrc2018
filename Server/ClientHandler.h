@@ -36,12 +36,14 @@ private:
 	GameMaster * games_;
 
 	static void * handleCLientThread(void * params);
+public:
 	vector<string> splitedString(string string_to_split, char delim);
 	string intToString(int num);
 	int stringToInt(string str);
-public:
 	ClientHandler(SocketManager * sockets ,ThreadManager * threads);
 	void handleClient(int client_socket);
+	CommandsManager * getCommandSet();
+	GameMaster *getGameMaster();
 	virtual ~ClientHandler();
 };
 
