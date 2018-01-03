@@ -1,8 +1,13 @@
-/*
- * ListCommand.h
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Dec 31, 2017
- *      Author: shomps
+ * Class Name  : ListCommand.h
+ * Description : Defines the methods of ListCommand
  */
 
 #ifndef SRC_SERVER_LISTCOMMAND_H_
@@ -17,9 +22,33 @@ private:
 	GameMaster & games_;
 
 public:
+
+	/** Function name	: constructor
+	 * Parameters		: pointers to GameMaster
+	 * Return value	    : new ListCommand
+	 * General flow	    : constructs a ListCommand
+	 */
 	ListCommand(GameMaster & games_master);
+
+	/** Function name	: getName
+	 * Parameters		: none
+	 * Return value	    : string
+	 * General flow	    : returns command's name
+	 */
 	virtual string getName();
+
+	/** Function name	: execute
+	 * Parameters		: vector<string>
+	 * Return value	    : boolean
+	 * General flow	    : executes command
+	 */
 	virtual bool execute(vector <string> args);
+
+	/** Function name	: destructor
+	 * Parameters		: none
+	 * Return value	    : none
+	 * General flow	    : deletes the ListCommand
+	 */
 	virtual ~ListCommand();
 };
 

@@ -1,8 +1,13 @@
-/*
- * CommandManager.h
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Dec 28, 2017
- *      Author: yifat
+ * Class Name  : CommandsManager.h
+ * Description : Defines the methods of the CommandManager.
  */
 
 #ifndef COMMANDSMANAGER_H_
@@ -21,8 +26,26 @@ private:
 	map<string, Command *> command_map_;
 	GameMaster & games_;
 public:
+
+	/** Function name	: constructor
+	 * Parameters		: pointers to GameMaster, SocketManager
+	 * Return value	    : constructed CommandsManager
+	 * General flow	    : constructs a CommandsManager
+	 */
 	CommandsManager(GameMaster & gamesList, SocketManager * sockets);
+
+	/** Function name	: ExecuteCommand
+	 * Parameters		: string, vector<string>
+	 * Return value	    : boolean
+	 * General flow	    : executes command
+	 */
 	bool ExecuteCommand(string command, vector<string> args);
+
+	/** Function name	: destructor
+	 * Parameters		: none
+	 * Return value	    : none
+	 * General flow	    : destroys the CommandsManager
+	 */
 	virtual ~CommandsManager();
 };
 

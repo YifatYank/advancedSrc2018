@@ -1,8 +1,13 @@
-/*
- * joinCommand.h
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Dec 31, 2017
- *      Author: yifat
+ * Class Name  : JoinCommand.h
+ * Description : Defines the methods of JoinCommand
  */
 
 #ifndef SERVER_JOINCOMMAND_H_
@@ -19,9 +24,33 @@ private:
 	SocketManager * sockets_;
 
 public:
+
+	/** Function name	: constructor
+	 * Parameters		: pointers to GameMaster, SocketManager
+	 * Return value	    : new JoinCommand
+	 * General flow	    : constructs a JoinCommand
+	 */
 	JoinCommand(GameMaster & games_master, SocketManager * sockets);
+
+	/** Function name	: getName
+	 * Parameters		: none
+	 * Return value	    : string
+	 * General flow	    : returns command's name
+	 */
 	virtual string getName();
+
+	/** Function name	: execute
+	 * Parameters		: vector<string>
+	 * Return value	    : boolean
+	 * General flow	    : executes command
+	 */
 	virtual bool execute(vector <string> args);
+
+	/** Function name	: destructor
+	 * Parameters		: none
+	 * Return value	    : none
+	 * General flow	    : deletes the JoinCommand
+	 */
 	virtual ~JoinCommand();
 };
 

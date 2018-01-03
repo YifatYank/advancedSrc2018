@@ -1,8 +1,13 @@
-/*
- * joinCommand.cpp
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Dec 31, 2017
- *      Author: yifat
+ * Class Name  : JoinCommand.cpp
+ * Description : Implements the methods of JoinCommand
  */
 
 #include "JoinCommand.h"

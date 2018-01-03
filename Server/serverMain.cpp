@@ -1,9 +1,15 @@
-/*
- * serverMain.cpp
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Dec 10, 2017
- *      Author: yifat
+ * Class Name  : ServerMain.cpp
+ * Description : main class of Server area
  */
+
 #include "Server.h"
 #include "ClientHandler.h"
 #include "ThreadManager.h"

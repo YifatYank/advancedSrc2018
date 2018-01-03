@@ -1,3 +1,15 @@
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
+ *
+ * Class Name  : ThreadManager.cpp
+ * Description : Implements the methods of JoinCommand
+ */
+
 #include "ThreadManager.h"
 
 using namespace std;

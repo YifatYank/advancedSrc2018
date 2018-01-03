@@ -1,8 +1,13 @@
-/*
- * Game.h
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Dec 28, 2017
- *      Author: shomps
+ * Class Name  : Game.h
+ * Description : Defines the Game struct.
  */
 
 #ifndef SRC_SERVER_GAME_H_
