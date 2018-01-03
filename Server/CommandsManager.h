@@ -12,6 +12,8 @@
 #include <map>
 #include "Command.h"
 #include "GameMaster.h"
+#include "SocketManager.h"
+
 using namespace std;
 
 class CommandsManager {
@@ -19,7 +21,7 @@ private:
 	map<string, Command *> command_map_;
 	GameMaster & games_;
 public:
-	CommandsManager(GameMaster & gamesList);
+	CommandsManager(GameMaster & gamesList, SocketManager * sockets);
 	bool ExecuteCommand(string command, vector<string> args);
 	virtual ~CommandsManager();
 };

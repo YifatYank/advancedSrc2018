@@ -11,13 +11,13 @@
 #include "ListCommand.h"
 #include "Command.h"
 
-CommandsManager::CommandsManager(GameMaster & gamesList) :
+CommandsManager::CommandsManager(GameMaster & gamesList, SocketManager * sockets) :
 		games_(gamesList) {
 	//HEAD
 
 	Command * command = new StartCommand(this->games_);
 	this->command_map_[command->getName()] = command;
-	command = new JoinCommand(this->games_);
+	command = new JoinCommand(this->games_, sockets);
 	this->command_map_[command->getName()] = command;
 	command = new ListCommand(this->games_);
 	this->command_map_[command->getName()] = command;
