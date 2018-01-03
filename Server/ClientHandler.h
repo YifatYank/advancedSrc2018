@@ -25,10 +25,12 @@
 
 using namespace std;
 
+
 class ClientHandler {
 private:
 	CommandsManager * commandsSet_;
 	GameMaster * games_;
+	static void * handleCLientThead(void * params);
 
 	vector<string> splitedString(string string_to_split, char delim);
 	string intToString(int num);
@@ -38,5 +40,10 @@ public:
 	void handleClient(int client_socket);
 	virtual ~ClientHandler();
 };
+
+typedef struct {
+	int client_socket_;
+	ClientHandler * handler_;
+} ParamsToHandleCLientThread;
 
 #endif /* SERVER_CLIENTHANDLER_H_ */

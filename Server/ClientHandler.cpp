@@ -15,7 +15,8 @@ ClientHandler::ClientHandler() {
 }
 
 void ClientHandler::handleClient(int client_socket){
-	// Read from the client his command
+	ParamsToHandleCLientThread * params = (ParamsToHandleCLientThread *)malloc(sizeof(ParamsToHandleCLientThread ));
+	/*// Read from the client his command
 	char buffer[BUFFER_SIZE];
 	int err;
 	bool started= false;
@@ -47,12 +48,11 @@ void ClientHandler::handleClient(int client_socket){
 
 		// Execute the command
 		started = this->commandsSet_->ExecuteCommand(command_name, strings);
-	} while (!started);
+	} while (!started);*/
 }
 
 ClientHandler::~ClientHandler() {
-	free(this->commandsSet_);
-	free(this->games_);
+	free(this->commandsSet_);	free(this->games_);
 }
 
 vector<string> ClientHandler::splitedString(string string_to_split, char delim){
@@ -96,4 +96,45 @@ string ClientHandler::intToString(int num){
 	}
 
 	return str;
+}
+
+void * handleCLientThead(void * params){
+	ParamsToHandleCLientThread * handle_params = (ParamsToHandleCLientThread) * params;
+
+	// Read from the client his command
+	char buffer[BUFFER_SIZE];
+	int err;
+	bool started= false;
+	do {
+		for(int index = 0; index < BUFFER_SIZE; ++index){
+			buffer[index] = 0;
+		}
+
+		err = read(handle_params->client_socket_, buffer, BUFFER_SIZE);
+		if (err == -1) {
+			cout << "Error (reading num1)" << endl;
+			return NULL;
+		}
+		if (err == 0) {
+			cout << "Client 1 disconnected" << endl;
+			return NULL;
+		}
+
+		// Separate the client command in to words
+		vector<string> strings = handle_params->handler_->splitedString(string(buffer),' ');
+
+		// Takes the command name out of the splitedString
+		string command_name = strings.front();
+		strings.erase(strings.begin());
+
+		// Puts the client socket in the command params
+		string client_socket_String =
+				handle_params->handler_->intToString(handle_params->client_socket_);
+		strings.push_back(client_socket_String);
+
+		// Execute the command
+		started = handle_params->handler_->commandsSet_->ExecuteCommand(command_name, strings);
+	} while (!started);
+	free(handle_params);
+	pthread_exit(NULL);
 }
