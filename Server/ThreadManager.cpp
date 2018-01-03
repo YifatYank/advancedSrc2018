@@ -37,6 +37,14 @@ void ThreadManager::joinAll() {
 	pthread_mutex_unlock(&this->thread_mutex_);
 }
 
+void ThreadManager::killAll() {
+	for (unsigned int i = 0; i < this->threads_.size(); i ++) {
+		pthread_t temp = this->threads_.back();
+		this->threads_.pop_back();
+		pthread_cancel(temp);
+	}
+}
+
 ThreadManager::~ThreadManager() {
 	this->joinAll();
 }

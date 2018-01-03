@@ -17,10 +17,14 @@ using namespace std;
 class SocketManager {
 private:
 	vector<int> sockets_;
+	vector<int> sockets_in_game_;
 	pthread_mutex_t socket_mutex_;
 public:
 	SocketManager();
 	void addSocket(int socket);
+	void addToGame(int socket);
+	vector<int> getInGame();
+	vector<int> getWaiting();
 	void removeSocket(int socket);
 	void removeAll();
 	void closeSocket(int socket);

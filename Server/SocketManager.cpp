@@ -26,6 +26,31 @@ void SocketManager::addSocket(int socket) {
 	pthread_mutex_unlock(&this->socket_mutex_);
 }
 
+void SocketManager::addToGame(int socket) {
+	pthread_mutex_lock(&this->socket_mutex_);
+	vector<int>::iterator it;
+	for (it = this->sockets_.begin(); it != this->sockets_.end(); it ++) {
+		if ((*it) == socket) {
+			this->sockets_in_game_.push_back(*it);
+			this->sockets_.erase(it);
+			break;
+		}
+	}
+	pthread_mutex_unlock(&this->socket_mutex_);
+}
+
+vector<int> SocketManager::getInGame() {
+	pthread_mutex_lock(&this->socket_mutex_);
+	return this->sockets_;
+	pthread_mutex_unlock(&this->socket_mutex_);
+}
+
+vector<int> SocketManager::getWaiting() {
+	pthread_mutex_lock(&this->socket_mutex_);
+	return this->sockets_in_game_;
+	pthread_mutex_unlock(&this->socket_mutex_);
+}
+
 void SocketManager::removeSocket(int socket) {
 	pthread_mutex_lock(&this->socket_mutex_);
 	vector<int>::iterator it;

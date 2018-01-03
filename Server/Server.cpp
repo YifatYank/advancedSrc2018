@@ -44,6 +44,13 @@ Server::Server(int port, ClientHandler & client_handler,
 }
 
 void Server::start() {
+	ParamsToOuterThread params = ParamsToOuterThread{this->threads_, this->sockets_, this->handler_.getGames()};
+	int errno;
+	pthread_t threadno;
+	// Create the thread and send the arguments to it.
+	errno = pthread_create(&threadno, NULL, ClientHandler::handleCLientThread,
+			(void *) params);
+
 	int client_socket;
 
 	// Initiating the server socket
@@ -175,4 +182,34 @@ void Server::setConfigs() {
 	int port;
 	inFile >> port;
 	this->port_ = port;
+}
+
+static void * Server::OuterThread(void * params) {
+	ParamsToOuterThread * everything = (ParamsToOuterThread*) params;
+	everything->threads->killAll();
+	delete (everything->games);
+	vector<int> waiting = everything->sockets->getWaiting();
+	vector<int> playing = everything->sockets->getInGame();
+	string destroy = "_red_button_";
+	int release = -2;
+	int err;
+	vector<int>::iterator it;
+	for (it = waiting.begin(); it != waiting.end(); it++) {
+		err = write(*it, &destroy, sizeof(destroy));
+		if (err == -1) {
+			throw "Error (destroying client)";
+			exit(-1);
+		}
+	}
+	for (it = playing.begin(); it != playing.end(); it++) {
+		for (int i = 0; i < 2; i++) {
+			err = write(*it, &release, sizeof(release));
+			if (err == -1) {
+				throw "Error (releasing client)";
+				exit(-1);
+			}
+		}
+	}
+	everything->sockets->closeAll();
+	return NULL;
 }
