@@ -112,7 +112,7 @@ string ClientHandler::intToString(int num){
 }
 
 void * handleCLientThread(void * params){
-/*	ParamsToHandleCLientThread * handle_params = (ParamsToHandleCLientThread) * params;
+	ParamsToHandleCLientThread * handle_params = (ParamsToHandleCLientThread *)params;
 
 	// Read from the client his command
 	char buffer[BUFFER_SIZE];
@@ -146,10 +146,10 @@ void * handleCLientThread(void * params){
 		strings.push_back(client_socket_String);
 
 		// Execute the command
-		started = handle_params->handler_->commandsSet_->ExecuteCommand(command_name, strings);
+		started = handle_params->handler_->getCommandSet()->ExecuteCommand(command_name, strings);
 	} while (!started);
 	free(handle_params);
-	pthread_exit(NULL);*/
+	pthread_exit(NULL);
 return NULL;
 }
 

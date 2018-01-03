@@ -35,8 +35,8 @@ private:
 	CommandsManager * commandsSet_;
 	GameMaster * games_;
 
-	static void * handleCLientThread(void * params);
 public:
+	static void * handleCLientThread(void * params);
 	vector<string> splitedString(string string_to_split, char delim);
 	string intToString(int num);
 	int stringToInt(string str);
