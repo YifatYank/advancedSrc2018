@@ -66,6 +66,7 @@ public:
 #endif /* SERVER_H_ */
 
 typedef struct {
+	Server * server;
 	ThreadManager * threads;
 	SocketManager * sockets;
 	GameMaster * games;

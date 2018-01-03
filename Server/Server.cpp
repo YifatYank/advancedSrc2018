@@ -44,7 +44,10 @@ Server::Server(int port, ClientHandler & client_handler,
 }
 
 void Server::start() {
-	ParamsToOuterThread params = ParamsToOuterThread{this->threads_, this->sockets_, this->handler_.getGames()};
+	ParamsToOuterThread * params = (ParamsToOuterThread*) malloc(
+			sizeof(ParamsToOuterThread));
+	params = ParamsToOuterThread { this->threads_, this->sockets_,
+			this->handler_.getGameMaster(), this };
 	int errno;
 	pthread_t threadno;
 	// Create the thread and send the arguments to it.
@@ -185,6 +188,10 @@ void Server::setConfigs() {
 }
 
 static void * Server::OuterThread(void * params) {
+	string message;
+	do {
+		cin >> message;
+	} while (message != "exit");
 	ParamsToOuterThread * everything = (ParamsToOuterThread*) params;
 	everything->threads->killAll();
 	delete (everything->games);
@@ -211,5 +218,9 @@ static void * Server::OuterThread(void * params) {
 		}
 	}
 	everything->sockets->closeAll();
+	//TODO check- are there more sockets to close?
+	everything->server->stop();
+	delete (everything->server);
+	free (everything);
 	return NULL;
 }
