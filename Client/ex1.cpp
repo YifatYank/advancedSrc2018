@@ -57,12 +57,19 @@ int main() {
 	case (REMOTE_PALYER): {
 		Player * temp;
 		ClientCommandsManager commander = ClientCommandsManager(
-						*(Client::getInctance()), &temp);
+				*(Client::getInctance()), &temp);
 		bool started = false;
 		string command, name;
 		do {
+			cout << "Enter one of the following commands:" << endl;
+			cout << "'start (game name)' : start a new game as the black player"
+					<< endl;
+			cout
+					<< "'join (game name)' : join an existing game as the white player"
+					<< endl;
+			cout << "'list_games' : show existing games" << endl;
 			cin >> command;
-			if(command != "list_games"){
+			if (command != "list_games") {
 				cin >> name;
 				command += " ";
 				command += name;

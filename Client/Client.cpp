@@ -46,13 +46,13 @@ void Client::ResetInstace() {
 Client::Client() :
 		server_ip_(SERVER_IP), server_port_(SERVER_PORT), client_socket_(0) {
 	setConfigs();
-	cout << "Client constructed" << endl;
+	//cout << "Client constructed" << endl;
 }
 
 Client::Client(const char *server_ip, int server_port) :
 		server_port_(server_port), client_socket_(0) {
 	strcpy(this->server_ip_, server_ip);
-	cout << "Client constructed" << endl;
+	//cout << "Client constructed" << endl;
 }
 
 void Client::connectToServer() {
