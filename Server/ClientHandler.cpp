@@ -18,6 +18,8 @@ ClientHandler::ClientHandler(SocketManager * sockets , ThreadManager * threads) 
 
 void ClientHandler::handleClient(int client_socket){
 	ParamsToHandleCLientThread * params = (ParamsToHandleCLientThread *)malloc(sizeof(ParamsToHandleCLientThread ));
+	params->client_socket_ = client_socket;
+	params->handler_= this;
 	int errno;
 	pthread_t threadno;
 	// Create the thread and send the arguments to it.
