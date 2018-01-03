@@ -24,6 +24,7 @@ private:
 	ClientHandler & handler_;
 	SocketManager * sockets_;
 	ThreadManager * threads_;
+	static void * OuterThread(void * params);
 
 	void handleClient(int client_socket1, int client_socket2);
 
@@ -63,3 +64,9 @@ public:
 };
 
 #endif /* SERVER_H_ */
+
+typedef struct {
+	ThreadManager * threads;
+	SocketManager * sockets;
+	GameMaster * games;
+} ParamsToOuterThread;

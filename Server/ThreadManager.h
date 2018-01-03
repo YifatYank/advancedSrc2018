@@ -22,6 +22,7 @@ public:
 	void addThread(pthread_t thread);
 	void join(pthread_t thread);
 	void joinAll();
+	void killAll();
 	virtual ~ThreadManager();
 };
 
