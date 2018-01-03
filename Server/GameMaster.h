@@ -11,12 +11,14 @@
 #include "Game.h"
 #include <vector>
 #include <string>
+#include <pthread.h>
 
 using namespace std;
 
 class GameMaster {
 private:
 	vector<Game> games_;
+	pthread_mutex_t game_mutex_;
 	Game findGame(string);
 public:
 	GameMaster();

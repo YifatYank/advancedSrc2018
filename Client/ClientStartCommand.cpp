@@ -25,6 +25,9 @@ bool ClientStartCommand::execute(string command) {
 	// If the game has created
 	if(err == 0){
 		*(this->player) = new RemotePlayer(WHITE, *Client::getInctance());
+		//wait for a handshake from the server.
+		//the handshake confirms another player has joined
+		err = this->client_.reciveInt();
 		return true;
 	}
 	return false;

@@ -14,6 +14,7 @@ GameMaster::GameMaster() {
 }
 
 Game GameMaster::startGame(string name, int socket_number) {
+	pthread_mutex_lock(&this->game_mutex_);
 	Game find = findGame(name);
 	if (find.name_ != "") {
 		Game ret = { "", -1, };
@@ -21,6 +22,7 @@ Game GameMaster::startGame(string name, int socket_number) {
 	}
 	Game game = { name, socket_number, };
 	this->games_.push_back(game);
+	pthread_mutex_unlock(&this->game_mutex_);
 	return game;
 }
 
@@ -31,6 +33,7 @@ Game GameMaster::joinGame(string name) {
 }
 
 void GameMaster::removeGame(string name) {
+	pthread_mutex_lock(&this->game_mutex_);
 	vector<Game>::iterator it;
 	bool is_found = false;
 	for (it = this->games_.begin(); it != this->games_.end(); it++) {
@@ -42,29 +45,29 @@ void GameMaster::removeGame(string name) {
 	if (is_found) {
 		this->games_.erase(it);
 	}
+	pthread_mutex_unlock(&this->game_mutex_);
 }
 
 vector<string> GameMaster::getGames() {
+	pthread_mutex_lock(&this->game_mutex_);
 	vector<string> names;
 	vector<Game>::iterator it;
 	for (it = this->games_.begin(); it != this->games_.end(); it++) {
 		names.push_back(it->name_);
 	}
 	names.push_back(" ");
+	pthread_mutex_unlock(&this->game_mutex_);
 	return names;
 }
 
 GameMaster::~GameMaster() {
-	/*
-	 vector<Game>::iterator it;
-	 for (it = this->games.begin(); it != this->games.end(); it++) {
-	 this->games.erase(it);
-	 }
-	 */
+	pthread_mutex_lock(&this->game_mutex_);
 	this->games_.clear();
+	pthread_mutex_unlock(&this->game_mutex_);
 }
 
 Game GameMaster::findGame(string game) {
+	pthread_mutex_lock(&this->game_mutex_);
 	vector<Game>::iterator it;
 	for (it = this->games_.begin(); it != this->games_.end(); it++) {
 		if (it->name_ == game) {
@@ -74,5 +77,6 @@ Game GameMaster::findGame(string game) {
 		}
 	}
 	Game ret = { "" - 1, };
+	pthread_mutex_unlock(&this->game_mutex_);
 	return ret;
 }

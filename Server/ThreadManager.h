@@ -16,6 +16,7 @@ using namespace std;
 class ThreadManager {
 private:
 	vector<pthread_t> threads_;
+	pthread_mutex_t thread_mutex_;
 public:
 	ThreadManager();
 	void addThread(pthread_t thread);

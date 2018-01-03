@@ -8,8 +8,24 @@
 #ifndef SRC_SERVER_SOCKETMANAGER_H_
 #define SRC_SERVER_SOCKETMANAGER_H_
 
+#include <sys/socket.h>
+#include <vector>
+#include <pthread.h>
 
+using namespace std;
 
-
+class SocketManager {
+private:
+	vector<int> sockets_;
+	pthread_mutex_t socket_mutex_;
+public:
+	SocketManager();
+	void addSocket(int socket);
+	void removeSocket(int socket);
+	void removeAll();
+	void closeSocket(int socket);
+	void closeAll();
+	virtual ~SocketManager();
+};
 
 #endif /* SRC_SERVER_SOCKETMANAGER_H_ */
