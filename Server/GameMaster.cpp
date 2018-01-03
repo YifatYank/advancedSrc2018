@@ -32,10 +32,15 @@ Game GameMaster::joinGame(string name) {
 
 void GameMaster::removeGame(string name) {
 	vector<Game>::iterator it;
+	bool is_found = false;
 	for (it = this->games_.begin(); it != this->games_.end(); it++) {
 		if (it->name_ == name) {
-			this->games_.erase(it);
+			is_found = true;
+			break;
 		}
+	}
+	if (is_found) {
+		this->games_.erase(it);
 	}
 }
 

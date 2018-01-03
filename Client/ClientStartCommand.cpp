@@ -24,7 +24,7 @@ bool ClientStartCommand::execute(string command) {
 
 	// If the game has created
 	if(err == 0){
-		*(this->player) = new RemotePlayer(WHITE);
+		*(this->player) = new RemotePlayer(WHITE, *Client::getInctance());
 		return true;
 	}
 	return false;

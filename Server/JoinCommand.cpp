@@ -26,13 +26,15 @@ bool JoinCommand::execute(vector<string> args) {
 	string game_name = args.front();
 	string client_socket_str = args.back();
 	int client_socket = this->string_to_int(client_socket_str);
-	int return_value = 0;
+	int return_value;
 
 	// Get from the game master the game the user want to join.
 	Game game = this->games_.joinGame(game_name);
 
 	// If the game is a legal game
 	if (game.name_ != "" && game.socket_ != -1) {
+		return_value = 0;
+	} else {
 		return_value = -1;
 	}
 

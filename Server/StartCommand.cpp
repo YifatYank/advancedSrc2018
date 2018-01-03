@@ -22,7 +22,7 @@ StartCommand::StartCommand(GameMaster & games_master) :
 
 bool StartCommand::execute(vector<string> args) {
 	int err, return_code = 0;
-	string game_name = args.front()();
+	string game_name = args.front();
 	string client_socket_str = args.back();
 	int client_socket = this->string_to_int(client_socket_str);
 

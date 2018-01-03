@@ -23,7 +23,7 @@ bool ClientJoinCommand::execute(string command) {
 	this->client_.sendString(command);
 	int res = this->client_.reciveInt();
 	if (res == 0) {
-		*(this->player_) = new RemotePlayer(BLACK);
+		*(this->player_) = new RemotePlayer(BLACK, *Client::getInctance());
 		return true;
 	}
 	return false;

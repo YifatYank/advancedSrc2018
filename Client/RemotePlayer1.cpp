@@ -1,24 +1,53 @@
+/*
+ * RemotePlayer.cpp
+ *
+ *  Created on: Dec 10, 2017
+ *      Author: yifat
+ */
+
+
 #include "ConsuleDisplay.h"
 #include "RemotePlayer.h"
 #include <iostream>
+using namespace std;
 
 #define BLACK_PLAYER 1
 #define WHITE_PLAYER 2
 
 
-RemotePlayer::RemotePlayer(Client & client): client_(client), value_(WHITE), first_t_(true) {
-}
+//RemotePlayer::RemotePlayer(Client & client){
+//}
 
-RemotePlayer::RemotePlayer(CellValue value, Client & client) : client_(client), value_(value), first_t_(true){
+//		value_(WHITE), client_(client), first_t_(true) {
+//	// Initiates the connection to the remote player
+//	try {
+//		this->client_.connectToServer();
+//	} catch (const char * msg) {
+//		cout << "Cannot start the communication to the server, reason: " << msg
+//				<< endl;
+//	}
+
+//	int player = 1;
+	// Get from the server the the local player's type, and set the remote player's
+	// type as the opposite of the local player's type.
+//	try {
+//		player = this->client_.reciveInt();
+//	} catch (const char * msg) {
+//		cout << msg << endl;
+//	}
+
+//	if (player == BLACK_PLAYER) {
+//		this->value_ = WHITE;
+//	} else if (player == WHITE_PLAYER) {
+//		this->value_ = BLACK;
+//	}
+//}
+/**
+RemotePlayer::RemotePlayer(CellValue value, Client & client) : value_(value), client_(Client::getInctance()), first_t_(true) {
 }
 
 CellValue RemotePlayer::getValue() const {
 	return this->value_;
-}
-
-
-RemotePlayer::~RemotePlayer(){
-
 }
 
 Point RemotePlayer::move(vector<Point *> * moves, Point opponent_move,
@@ -58,3 +87,7 @@ Point RemotePlayer::move(vector<Point *> * moves, Point opponent_move,
 	this->first_t_ = false;
 	return Point(x_coord, y_coord);
 }
+
+RemotePlayer::~RemotePlayer() {
+}
+*/
