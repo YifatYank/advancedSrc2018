@@ -41,8 +41,8 @@ void ThreadPool::executeTasks() {
 }
 
 void ThreadPool::terminate() {
-	pthread_mutex_destroy(&lock);
 	stopped = true;
+	pthread_mutex_destroy(&lock);
 }
 
 ThreadPool::~ThreadPool() {
