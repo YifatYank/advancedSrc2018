@@ -13,6 +13,7 @@
 #ifndef SERVER_CLIENTHANDLER_H_
 #define SERVER_CLIENTHANDLER_H_
 
+#include "ThreadPool.h"
 #include "CommandsManager.h"
 #include "ServerDefinitions.h"
 #include "GameMaster.h"
@@ -32,6 +33,7 @@
 
 using namespace std;
 
+#define MAX_THREADS 5
 
 class ClientHandler {
 private:
@@ -39,6 +41,7 @@ private:
 	ThreadManager * threads_;
 	CommandsManager * commandsSet_;
 	GameMaster * games_;
+	ThreadPool pool;
 
 public:
 	/** Function name	: handleClientThread

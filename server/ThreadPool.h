@@ -16,19 +16,19 @@ using namespace std;
 
 class ThreadPool {
 private:
+	queue<Task *> tasksQueue_;
+	pthread_t* threads_;
+	void executeTasks();
+	bool stopped_;
+	pthread_mutex_t lock_;
+
+	static void *execute(void *arg);
+
+public:
 	ThreadPool(int threadsNum);
 	void addTask(Task *task);
 	void terminate();
 	virtual ~ThreadPool();
-public:
-	queue<Task *> tasksQueue;
-	pthread_t* threads;
-	void executeTasks();
-	bool stopped;
-	pthread_mutex_t lock;
-
-	static void *execute(void *arg);
 };
-
 
 #endif /* SRC_SERVER_THREADPOOL_H_ */

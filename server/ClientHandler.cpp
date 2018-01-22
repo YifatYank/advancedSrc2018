@@ -14,65 +14,73 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-ClientHandler::ClientHandler(SocketManager * sockets , ThreadManager * threads) {
+ClientHandler::ClientHandler(SocketManager * sockets, ThreadManager * threads) :
+		pool(MAX_THREADS) {
 	this->sockets_ = sockets;
 	this->threads_ = threads;
 	this->games_ = new GameMaster();
-	this->commandsSet_= new CommandsManager(*(this->games_), this->sockets_);
+	this->commandsSet_ = new CommandsManager(*(this->games_), this->sockets_, this->threads_);
 }
 
-void ClientHandler::handleClient(int client_socket){
+void ClientHandler::handleClient(int client_socket) {
 	ParamsToHandleCLientThread * params = (ParamsToHandleCLientThread *)malloc(sizeof(ParamsToHandleCLientThread ));
-	params->client_socket_ = client_socket;
-	params->handler_= this;
-	pthread_t threadno =0;
-	// Create the thread and send the arguments to it.
-	pthread_create(&threadno, NULL, ClientHandler::handleCLientThread, (void *) params);
-	this->threads_->addThread(threadno);
+	 params->client_socket_ = client_socket;
+	 params->handler_= this;
+	 pthread_t threadno = 0;
+
+	 // Pre thread pool code
+	 // Create the thread and send the arguments to it.
+	 //pthread_create(&threadno, NULL, ClientHandler::handleCLientThread, (void *) params);
+	 //this->threads_->addThread(threadno);
+
+	 // Create the task and add the task to the tasks list of the thread pool
+	 this->pool.addTask(new Task(ClientHandler::handleCLientThread,(void *) params));
 }
 
 ClientHandler::~ClientHandler() {
+	this->pool.terminate();
 	free(this->commandsSet_);
 	free(this->games_);
 }
 
-CommandsManager * ClientHandler::getCommandSet(){
+CommandsManager * ClientHandler::getCommandSet() {
 	return this->commandsSet_;
 }
 
-vector<string> ClientHandler::splitedString(string string_to_split, char delim){
+vector<string> ClientHandler::splitedString(string string_to_split,
+		char delim) {
 	vector<string> strings;
 	int size = string_to_split.size();
 	string str = "";
-	for(int index = 0; index < size; index++) {
-		if(string_to_split[index] !=' '){
+	for (int index = 0; index < size; index++) {
+		if (string_to_split[index] != ' ') {
 			str += string_to_split[index];
-		} else{
+		} else {
 			strings.push_back(str);
 			str = "";
 		}
 	}
-	if(str.size() != 0){
+	if (str.size() != 0) {
 		strings.push_back(str);
 	}
 
 	return strings;
 }
 
-string ClientHandler::intToString(int num){
+string ClientHandler::intToString(int num) {
 	string str = "";
 	int digit;
 	char char_digit;
 
-	if(num == 0){
+	if (num == 0) {
 		return 0;
 	}
-	if(num < -1){
+	if (num < -1) {
 		str += '-';
 		num = num * -1;
 	}
 
-	while(num != 0){
+	while (num != 0) {
 		digit = num % 10;
 		char_digit = char(digit);
 		char_digit += 48;
@@ -83,15 +91,16 @@ string ClientHandler::intToString(int num){
 	return str;
 }
 
-void * ClientHandler::handleCLientThread(void * params){
-	ParamsToHandleCLientThread * handle_params = (ParamsToHandleCLientThread *)params;
+void * ClientHandler::handleCLientThread(void * params) {
+	ParamsToHandleCLientThread * handle_params =
+			(ParamsToHandleCLientThread *) params;
 
 	// Read from the client his command
 	char buffer[BUFFER_SIZE];
 	int err;
-	bool started= false;
+	bool started = false;
 	do {
-		for(int index = 0; index < BUFFER_SIZE; ++index){
+		for (int index = 0; index < BUFFER_SIZE; ++index) {
 			buffer[index] = 0;
 		}
 
@@ -106,27 +115,27 @@ void * ClientHandler::handleCLientThread(void * params){
 		}
 
 		// Separate the client command in to words
-		vector<string> strings = handle_params->handler_->splitedString(string(buffer),' ');
+		vector<string> strings = handle_params->handler_->splitedString(
+				string(buffer), ' ');
 
 		// Takes the command name out of the splitedString
 		string command_name = strings.front();
 		strings.erase(strings.begin());
 
 		// Puts the client socket in the command params
-		string client_socket_String =
-				handle_params->handler_->intToString(handle_params->client_socket_);
+		string client_socket_String = handle_params->handler_->intToString(
+				handle_params->client_socket_);
 		strings.push_back(client_socket_String);
 
 		// Execute the command
-		started = handle_params->handler_->getCommandSet()->ExecuteCommand(command_name, strings);
+		started = handle_params->handler_->getCommandSet()->ExecuteCommand(
+				command_name, strings);
 	} while (!started);
 	free(handle_params);
 	pthread_exit(NULL);
-return NULL;
+	return NULL;
 }
 
-
-
-GameMaster *ClientHandler::getGameMaster(){
+GameMaster *ClientHandler::getGameMaster() {
 	return this->games_;
 }

@@ -16,13 +16,12 @@
 #include "ListCommand.h"
 #include "Command.h"
 
-CommandsManager::CommandsManager(GameMaster & gamesList, SocketManager * sockets) :
+CommandsManager::CommandsManager(GameMaster & gamesList, SocketManager * sockets, ThreadManager * threads) :
 		games_(gamesList) {
 	//HEAD
-
 	Command * command = new StartCommand(this->games_);
 	this->command_map_[command->getName()] = command;
-	command = new JoinCommand(this->games_, sockets);
+	command = new JoinCommand(this->games_, sockets, threads);
 	this->command_map_[command->getName()] = command;
 	command = new ListCommand(this->games_);
 	this->command_map_[command->getName()] = command;

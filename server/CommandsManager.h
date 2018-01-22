@@ -18,6 +18,7 @@
 #include "Command.h"
 #include "GameMaster.h"
 #include "SocketManager.h"
+#include "ThreadManager.h"
 
 using namespace std;
 
@@ -31,7 +32,7 @@ public:
 	 * Return value	    : constructed CommandsManager
 	 * General flow	    : constructs a CommandsManager
 	 */
-	CommandsManager(GameMaster & gamesList, SocketManager * sockets);
+	CommandsManager(GameMaster & gamesList, SocketManager * sockets, ThreadManager * threads);
 
 	/** Function name	: ExecuteCommand
 	 * Parameters		: string, vector<string>

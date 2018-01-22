@@ -22,10 +22,11 @@
 #include <stdlib.h>
 #include <fstream>
 
-JoinCommand::JoinCommand(GameMaster & games_master, SocketManager * sockets) :
+JoinCommand::JoinCommand(GameMaster & games_master, SocketManager * sockets, ThreadManager * threads) :
 		games_(games_master) {
 	this->name_ = "join";
-	this->sockets_= sockets;
+	this->sockets_ = sockets;
+	this->threads_ = threads;
 }
 
 bool JoinCommand::execute(vector<string> args) {
@@ -73,13 +74,106 @@ bool JoinCommand::execute(vector<string> args) {
 		throw "Error (handshake)";
 		exit(-1);
 	}
-	int num1, num2;
+
+	// Make the game to be handle by an other thread out of the thread pull.
+	params_to_join_command_thread * params =
+			(params_to_join_command_thread *) malloc(
+					sizeof(params_to_join_command_thread));
+	params->client_socket1 = client_socket1;
+	params->client_sokcet2 = client_socekt2;
+	params->command = this;
+
+	pthread_t threano = 0;
+	pthread_create(&threano, NULL, executeThread, (void *) params);
+
+	this->threads_->addThread(threano);
+	return true;
+
+	/*
+	 *
+	 *
+	 *
+	 // todo - turn to a threadcl
+	 int num1, num2;
+	 while (true) {
+	 //read new arguments from client1
+	 err = read(client_socket1, &num1, sizeof(num1));
+	 if (err == -1) {
+	 throw "Error (reading num1)";
+	 return false;
+	 }
+	 if (err == 0) {
+	 break;
+	 }
+	 err = read(client_socket1, &num2, sizeof(num2));
+	 if (err == -1) {
+	 throw "Error (reading num2)";
+	 exit(-1);
+	 }
+
+	 //write numbers to client2
+	 err = write(client_socekt2, &num1, sizeof(num1));
+	 if (err == -1) {
+	 throw "Error (writing num1)";
+	 exit(-1);
+	 }
+	 err = write(client_socekt2, &num2, sizeof(num2));
+	 if (err == -1) {
+	 throw "Error (writing num2)";
+	 exit(-1);
+	 }
+
+	 //read new arguments from client2
+	 err = read(client_socekt2, &num1, sizeof(num1));
+	 if (err == -1) {
+	 throw "Error (reading num1)";
+	 exit(-1);
+	 }
+	 if (err == 0) {
+	 break;
+	 }
+	 err = read(client_socekt2, &num2, sizeof(num2));
+	 if (err == -1) {
+	 throw "Error (reading num2)";
+	 exit(-1);
+	 }
+
+	 //write numbers to client1}
+	 err = write(client_socket1, &num1, sizeof(num1));
+	 if (err == -1) {
+	 throw "Error (writing num1)";
+	 exit(-1);
+	 }
+	 err = write(client_socket1, &num2, sizeof(num2));
+	 if (err == -1) {
+	 throw "Error (writing num2)";
+	 exit(-1);
+	 }
+	 }
+	 close(client_socket1);
+	 this->sockets_->removeSocket(client_socket1);
+	 close(client_socekt2);
+	 this->sockets_->removeSocket(client_socekt2);
+	 return true;*/
+}
+
+void * JoinCommand::executeThread(void * params) {
+	// todo - turn to a threadcl
+	params_to_join_command_thread * parameters =
+			(params_to_join_command_thread *) params;
+	int client_socket1 = parameters->client_socket1;
+	int client_socekt2 = parameters->client_sokcet2;
+	JoinCommand * command = parameters->command;
+
+	free(parameters);
+
+	int num1, num2, err;
 	while (true) {
 		//read new arguments from client1
 		err = read(client_socket1, &num1, sizeof(num1));
 		if (err == -1) {
 			throw "Error (reading num1)";
-			return false;
+			return NULL;
 		}
 		if (err == 0) {
 			break;
@@ -130,15 +224,16 @@ bool JoinCommand::execute(vector<string> args) {
 		}
 	}
 	close(client_socket1);
-	this->sockets_->removeSocket(client_socket1);
-	close(client_socekt2);
-	this->sockets_->removeSocket(client_socekt2);
-	return true;
+	command->sockets_->removeSocket(client_socket1);
+	close (client_socekt2);
+	command->sockets_->removeSocket(client_socekt2);
+	return NULL;
 }
 
 string JoinCommand::getName() {
-	return this->name_ ;
+	return this->name_;
 }
 
-JoinCommand::~JoinCommand() {}
+JoinCommand::~JoinCommand() {
+}
 
