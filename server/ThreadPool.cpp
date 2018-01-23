@@ -1,8 +1,13 @@
-/*
- * ThreadPool.c
+/**
+ * Names       : Yifat Yankocivh
+ * 				 Shoham Bar-Gad
+ * IDs	       : 204709224
+ * 				 315706614
+ * User Names  : yankovy
+ * 				 bagnosh
  *
- *  Created on: Jan 21, 2018
- *      Author: shomps
+ * Class Name  : ThreadPool.cpp
+ * Description : Implements the methods of ThreadPool
  */
 
 #include "ThreadPool.h"

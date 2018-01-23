@@ -54,6 +54,11 @@ public:
 	 */
 	virtual ~JoinCommand();
 
+	/** Function name	: executeThread
+	 * Parameters		: void* (generic pointer)
+	 * Return value	    : none
+	 * General flow	    : static method. executes thread
+	 */
 	static void * executeThread(void * params);
 };
 
